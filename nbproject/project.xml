@@ -3,7 +3,11 @@
     <type>org.netbeans.modules.java.j2seproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
+<<<<<<< HEAD
             <name>Sistema_farmacia</name>
+=======
+            <name>Sistema_De_Gestion_Para_Farmacias</name>
+>>>>>>> 15d08c0b8fc31a0a698b2514fff75debfde29f93
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>

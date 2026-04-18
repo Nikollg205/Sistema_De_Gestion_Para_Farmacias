@@ -32,8 +32,8 @@ public class LoteInventarioDAO implements CrudSimpleInterface<LoteInventario> {
         List<LoteInventario> registros = new ArrayList<>();
 
         try {
-            String sql = "SELECT l.id_lote, l.fecha_caducidad, " +
-                    "m.id_medicamento, m.nombre_medicamento, m.precio, m.unidad_medida, m.tipo_medicamento " +
+            String sql = "SELECT l.id_lote, l.fecha_caducidad, l.cantidad, " +
+                    "m.id_medicamento, m.nombre_medicamento, m.precio, m.formula, m.unidad_medida, m.tipo_medicamento " +
                     "FROM lote l " +
                     "INNER JOIN medicamento m ON l.id_medicamento = m.id_medicamento " +
                     "WHERE m.nombre_medicamento LIKE ?";
@@ -48,8 +48,14 @@ public class LoteInventarioDAO implements CrudSimpleInterface<LoteInventario> {
                 Medicamento med = new Medicamento();
 
                 med.setName(rs.getString("nombre_medicamento"));
-                med.setDescription("Sin descripcion");
-                med.setCode(Integer.parseInt(rs.getString("id_medicamento")));
+
+                String formula = rs.getString("formula");
+                if (formula == null || formula.trim().isEmpty() || formula.trim().length() < 5) {
+                    formula = "N/A";
+                }
+                med.setDescription(formula);
+
+                med.setCode(rs.getInt("id_medicamento"));
                 med.setPrice(rs.getDouble("precio"));
                 med.setCategory(rs.getString("tipo_medicamento"));
                 med.setMeasurementUnit(rs.getString("unidad_medida"));
@@ -58,7 +64,7 @@ public class LoteInventarioDAO implements CrudSimpleInterface<LoteInventario> {
                 LoteInventario lote = new LoteInventario(
                         rs.getString("id_lote"),
                         rs.getDate("fecha_caducidad").toLocalDate(),
-                        0, // ⚠ no tienes cantidad en BD
+                        rs.getInt("cantidad"),
                         med
                 );
 
@@ -82,7 +88,7 @@ public class LoteInventarioDAO implements CrudSimpleInterface<LoteInventario> {
         resp = false;
 
         try {
-            String sql = "INSERT INTO lote (lote, fecha_vencimiento, cantidad, codigo) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO lote (id_lote, fecha_caducidad, cantidad, id_medicamento) VALUES (?,?,?,?)";
 
             ps = CON.conectar().prepareStatement(sql);
             ps.setString(1, obj.getLoteNumber());
@@ -109,7 +115,7 @@ public class LoteInventarioDAO implements CrudSimpleInterface<LoteInventario> {
         resp = false;
 
         try {
-            String sql = "UPDATE lote SET cantidad=? WHERE lote=?";
+            String sql = "UPDATE lote SET cantidad=? WHERE id_lote=?";
 
             ps = CON.conectar().prepareStatement(sql);
             ps.setInt(1, obj.getAvailableQuantity());
@@ -159,7 +165,7 @@ public class LoteInventarioDAO implements CrudSimpleInterface<LoteInventario> {
         resp = false;
 
         try {
-            String sql = "SELECT lote FROM lote WHERE lote=?";
+            String sql = "SELECT id_lote FROM lote WHERE id_lote=?";
             ps = CON.conectar().prepareStatement(sql);
             ps.setString(1, texto);
 

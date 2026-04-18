@@ -1,7 +1,5 @@
 package medicamentos;
 
-import java.time.LocalDate;
-
 /**
  * Abstract class representing a liquid-type medicine.
  * Extends Medicamento and adds liquid-specific attributes.
@@ -20,7 +18,6 @@ public abstract class MedicamentoLiquido extends Medicamento {
      * @param price price of the medicine
      * @param category category of the medicine
      * @param measurementUnit measurement unit of the medicine
-     * @param dueDate expiration date
      * @param volumeMl volume in milliliters
      * @param liquidType type of liquid
      * @throws IllegalArgumentException if argument is invalid
@@ -33,11 +30,10 @@ public abstract class MedicamentoLiquido extends Medicamento {
             double price,
             String category,
             String measurementUnit,
-            LocalDate dueDate,
             double volumeMl,
             String liquidType
     ) {
-        super(stock, name, description, code, price, category, measurementUnit, dueDate);
+        super(stock, name, description, code, price, category, measurementUnit);
         setVolumeMl(volumeMl);
         setLiquidType(liquidType);
     }

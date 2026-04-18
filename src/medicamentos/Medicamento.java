@@ -1,7 +1,5 @@
 package medicamentos;
 
-import java.time.LocalDate;
-
 /**
  * Represents a generic medicine with common attributes.
  */
@@ -14,7 +12,6 @@ public class Medicamento {
     private int stock;
     private String category;
     private String measurementUnit;
-    private LocalDate dueDate;
 
     /**
      * Empty constructor for DAO usage
@@ -32,7 +29,6 @@ public class Medicamento {
      * @param price price of the medicine
      * @param category category of the medicine
      * @param measurementUnit measurement unit
-     * @param dueDate expiration date
      * @throws IllegalArgumentException if argument is invalid
      */
     public Medicamento(
@@ -42,8 +38,7 @@ public class Medicamento {
             int code,
             double price,
             String category,
-            String measurementUnit,
-            LocalDate dueDate
+            String measurementUnit
     ) {
         setStock(stock);
         setName(name);
@@ -52,7 +47,6 @@ public class Medicamento {
         setPrice(price);
         setCategory(category);
         setMeasurementUnit(measurementUnit);
-        setDueDate(dueDate);
     }
 
     public String getName() {
@@ -176,27 +170,4 @@ public class Medicamento {
         this.measurementUnit = measurementUnit.trim().toUpperCase();
     }
 
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
-
-    /**
-     * Sets expiration date
-     * @param dueDate date
-     */
-    public void setDueDate(LocalDate dueDate) {
-        if (dueDate == null) {
-            throw new IllegalArgumentException("Date cannot be null");
-        }
-
-        this.dueDate = dueDate;
-    }
-
-    /**
-     * Checks if medicine is expired
-     * @return true if expired
-     */
-    public boolean isExpired() {
-        return dueDate.isBefore(LocalDate.now());
-    }
 }

@@ -1,13 +1,11 @@
 package medicamentos;
 
-import interfaces.TipoComercial;
-
-import java.time.LocalDate;
+import interfaces.Marca;
 
 /**
  * Represents a branded pill medicine
  */
-public class PastillaMarca extends MedicamentoPastilla implements TipoComercial {
+public class PastillaMarca extends MedicamentoPastilla implements Marca {
 
     private String brand;
     private String patent;
@@ -20,15 +18,19 @@ public class PastillaMarca extends MedicamentoPastilla implements TipoComercial 
             double price,
             String category,
             String measurementUnit,
-            LocalDate dueDate,
             int unitCount,
             String pillType,
             String brand,
             String patent
     ) {
-        super(stock, name, description, code, price, category, measurementUnit, dueDate, unitCount, pillType);
+        super(stock, name, description, code, price, category, measurementUnit, unitCount, pillType);
         setBrand(brand);
         setPatent(patent);
+    }
+
+    @Override
+    public String getBrand() {
+        return brand;
     }
 
     /**
@@ -42,6 +44,11 @@ public class PastillaMarca extends MedicamentoPastilla implements TipoComercial 
         this.brand = brand.trim();
     }
 
+    @Override
+    public String getPatent() {
+        return patent;
+    }
+
     /**
      * Sets the patent
      * @param patent patent info
@@ -51,22 +58,6 @@ public class PastillaMarca extends MedicamentoPastilla implements TipoComercial 
             throw new IllegalArgumentException("Una patente no puede estar vacía");
         }
         this.patent = patent.trim();
-    }
-
-    /**
-     * Returns the brand name
-     */
-    @Override
-    public String getLaboratoryOrBrand() {
-        return brand;
-    }
-
-    /**
-     * Returns formatted commercial info
-     */
-    @Override
-    public String getCommercialInfo() {
-        return "Brand - " + brand + " (Patent: " + patent + ")";
     }
 
     @Override

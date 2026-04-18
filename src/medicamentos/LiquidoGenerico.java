@@ -1,13 +1,11 @@
 package medicamentos;
 
-import interfaces.TipoComercial;
-
-import java.time.LocalDate;
+import interfaces.Generico;
 
 /**
  * Represents a generic liquid medicine
  */
-public class LiquidoGenerico extends MedicamentoLiquido implements TipoComercial {
+public class LiquidoGenerico extends MedicamentoLiquido implements Generico {
 
     private String activeIngredient;
     private String laboratory;
@@ -23,15 +21,19 @@ public class LiquidoGenerico extends MedicamentoLiquido implements TipoComercial
             double price,
             String category,
             String measurementUnit,
-            LocalDate dueDate,
             double volumeMl,
             String liquidType,
             String activeIngredient,
             String laboratory
     ) {
-        super(stock, name, description, code, price, category, measurementUnit, dueDate, volumeMl, liquidType);
+        super(stock, name, description, code, price, category, measurementUnit, volumeMl, liquidType);
         setActiveIngredient(activeIngredient);
         setLaboratory(laboratory);
+    }
+
+    @Override
+    public String getActiveIngredient() {
+        return activeIngredient;
     }
 
     /**
@@ -44,6 +46,11 @@ public class LiquidoGenerico extends MedicamentoLiquido implements TipoComercial
         this.activeIngredient = activeIngredient.trim();
     }
 
+    @Override
+    public String getLaboratory() {
+        return laboratory;
+    }
+
     /**
      * Sets the laboratory
      */
@@ -52,16 +59,6 @@ public class LiquidoGenerico extends MedicamentoLiquido implements TipoComercial
             throw new IllegalArgumentException("El laboratorio no puede estar vacío");
         }
         this.laboratory = laboratory.trim();
-    }
-
-    @Override
-    public String getLaboratoryOrBrand() {
-        return laboratory;
-    }
-
-    @Override
-    public String getCommercialInfo() {
-        return "Generic - " + activeIngredient + " (" + laboratory + ")";
     }
 
     @Override

@@ -1,13 +1,11 @@
 package medicamentos;
 
-import interfaces.TipoComercial;
-
-import java.time.LocalDate;
+import interfaces.Marca;
 
 /**
  * Represents a branded liquid medicine
  */
-public class LiquidoMarca extends MedicamentoLiquido implements TipoComercial {
+public class LiquidoMarca extends MedicamentoLiquido implements Marca {
 
     private String brand;
     private String patent;
@@ -23,15 +21,19 @@ public class LiquidoMarca extends MedicamentoLiquido implements TipoComercial {
             double price,
             String category,
             String measurementUnit,
-            LocalDate dueDate,
             double volumeMl,
             String liquidType,
             String brand,
             String patent
     ) {
-        super(stock, name, description, code, price, category, measurementUnit, dueDate, volumeMl, liquidType);
+        super(stock, name, description, code, price, category, measurementUnit, volumeMl, liquidType);
         setBrand(brand);
         setPatent(patent);
+    }
+
+    @Override
+    public String getBrand() {
+        return brand;
     }
 
     /**
@@ -44,6 +46,11 @@ public class LiquidoMarca extends MedicamentoLiquido implements TipoComercial {
         this.brand = brand.trim();
     }
 
+    @Override
+    public String getPatent() {
+        return patent;
+    }
+
     /**
      * Sets the patent
      */
@@ -52,16 +59,6 @@ public class LiquidoMarca extends MedicamentoLiquido implements TipoComercial {
             throw new IllegalArgumentException("La patente no puede estar vacía");
         }
         this.patent = patent.trim();
-    }
-
-    @Override
-    public String getLaboratoryOrBrand() {
-        return brand;
-    }
-
-    @Override
-    public String getCommercialInfo() {
-        return "Brand - " + brand + " (Patent: " + patent + ")";
     }
 
     @Override

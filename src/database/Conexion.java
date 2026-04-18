@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package database;
 
 import java.sql.Connection;
@@ -10,31 +6,31 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class Conexion {
-     private final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    private final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private final String URL = "jdbc:mysql://localhost:3308/";
     private final String DB = "dbsistema";
     private final String USER = "root";
     private final String PASSWORD = "";
-    
-    
-    
+
+
+
     public Connection cadena;
     public static Conexion instancia;
-    
+
     public Conexion(){
-     this.cadena = null;
-     
+        this.cadena = null;
+
     }
-    
+
     public Connection conectar(){
         try {
             Class.forName(DRIVER);
             this.cadena = DriverManager.getConnection(URL+DB,USER,PASSWORD);
-            
+
         } catch (ClassNotFoundException |SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-       return this.cadena;
+        return this.cadena;
     }
     public void desconectar(){
         try {
@@ -42,7 +38,7 @@ public class Conexion {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-    
+
     }
     public synchronized static Conexion getInstancia(){
         if(instancia==null){
@@ -50,5 +46,5 @@ public class Conexion {
         }
         return instancia;
     }
-    
+
 }

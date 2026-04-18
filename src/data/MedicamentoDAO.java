@@ -40,7 +40,7 @@ public class MedicamentoDAO implements CrudSimpleInterface<Medicamento> {
 
                 med.setName(rs.getString("nombre_medicamento"));
                 med.setDescription(rs.getString("formula"));
-                med.setCode(Integer.parseInt(rs.getString("id_medicamento")));
+                med.setCode(rs.getInt("id_medicamento"));
                 med.setPrice(rs.getDouble("precio"));
                 med.setMeasurementUnit(rs.getString("unidad_medida"));
                 med.setStock(rs.getInt("stock_medicamento"));
@@ -67,7 +67,7 @@ public class MedicamentoDAO implements CrudSimpleInterface<Medicamento> {
 
             ps = CON.conectar().prepareStatement(sql);
 
-            ps.setString(1, String.valueOf(obj.getCode()));
+            ps.setInt(1, obj.getCode());
             ps.setString(2, obj.getCategory());
             ps.setDouble(3, obj.getPrice());
             ps.setString(4, obj.getMeasurementUnit());
@@ -102,7 +102,7 @@ public class MedicamentoDAO implements CrudSimpleInterface<Medicamento> {
             ps.setString(4, obj.getDescription());
             ps.setInt(5, obj.getStock());
             ps.setString(6, obj.getName());
-            ps.setString(7, String.valueOf(obj.getCode()));
+            ps.setInt(7, obj.getCode());
 
             resp = ps.executeUpdate() > 0;
 

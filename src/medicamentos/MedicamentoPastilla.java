@@ -1,7 +1,5 @@
 package medicamentos;
 
-import java.time.LocalDate;
-
 /**
  * Abstract class representing a pill-type medicine.
  */
@@ -21,11 +19,10 @@ public abstract class MedicamentoPastilla extends Medicamento {
             double price,
             String category,
             String measurementUnit,
-            LocalDate dueDate,
             int unitCount,
             String pillType
     ) {
-        super(stock, name, description, code, price, category, measurementUnit, dueDate);
+        super(stock, name, description, code, price, category, measurementUnit);
         setUnitCount(unitCount);
         setPillType(pillType);
     }

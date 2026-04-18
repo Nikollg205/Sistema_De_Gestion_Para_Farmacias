@@ -1,13 +1,11 @@
 package medicamentos;
 
-import interfaces.TipoComercial;
-
-import java.time.LocalDate;
+import interfaces.Generico;
 
 /**
  * Represents a generic pill medicine
  */
-public class PastillaGenerica extends MedicamentoPastilla implements TipoComercial {
+public class PastillaGenerica extends MedicamentoPastilla implements Generico {
 
     private String activeIngredient;
     private String laboratory;
@@ -20,15 +18,19 @@ public class PastillaGenerica extends MedicamentoPastilla implements TipoComerci
             double price,
             String category,
             String measurementUnit,
-            LocalDate dueDate,
             int unitCount,
             String pillType,
             String activeIngredient,
             String laboratory
     ) {
-        super(stock, name, description, code, price, category, measurementUnit, dueDate, unitCount, pillType);
+        super(stock, name, description, code, price, category, measurementUnit, unitCount, pillType);
         setActiveIngredient(activeIngredient);
         setLaboratory(laboratory);
+    }
+
+    @Override
+    public String getActiveIngredient() {
+        return activeIngredient;
     }
 
     /**
@@ -42,6 +44,11 @@ public class PastillaGenerica extends MedicamentoPastilla implements TipoComerci
         this.activeIngredient = activeIngredient.trim();
     }
 
+    @Override
+    public String getLaboratory() {
+        return laboratory;
+    }
+
     /**
      * Sets the laboratory
      * @param laboratory laboratory name
@@ -52,22 +59,6 @@ public class PastillaGenerica extends MedicamentoPastilla implements TipoComerci
         }
         this.laboratory = laboratory.trim();
     }
-
-    /**
-     * Returns the laboratory name
-     */
-    @Override
-    public String getLaboratoryOrBrand() {
-        return laboratory;
-    }
-    /**
-     * Returns formatted commercial info
-     */
-    @Override
-    public String getCommercialInfo() {
-        return "Generic - " + activeIngredient + " (" + laboratory + ")";
-    }
-
 
     @Override
     public void showInfo() {

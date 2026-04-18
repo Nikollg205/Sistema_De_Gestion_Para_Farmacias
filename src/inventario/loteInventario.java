@@ -10,10 +10,10 @@ import java.time.LocalDate;
  */
 public class loteInventario {
 
-    private String loteNumber;
-    private LocalDate dueDate;
+    private final String loteNumber;
+    private final LocalDate dueDate;
     private int availableQuantity;
-    private Medicamento medicamento;
+    private final Medicamento medicamento;
 
     /**
      * Creates a new inventory batch
@@ -29,40 +29,31 @@ public class loteInventario {
             int availableQuantity,
             Medicamento medicamento
     ) {
-        setLoteNumber(loteNumber);
-        setDueDate(dueDate);
-        setAvailableQuantity(availableQuantity);
-        setMedicamento(medicamento);
+        if (loteNumber == null || loteNumber.trim().isEmpty()) {
+            throw new IllegalArgumentException("El número de lote no puede estar vacío");
+        }
+        if (dueDate == null) {
+            throw new IllegalArgumentException("La fecha no puede ser nula");
+        }
+        if (availableQuantity < 0) {
+            throw new IllegalArgumentException("La cantidad no puede ser negativa");
+        }
+        if (medicamento == null) {
+            throw new IllegalArgumentException("El medicamento no puede ser nulo");
+        }
+
+        this.loteNumber = loteNumber.trim();
+        this.dueDate = dueDate;
+        this.availableQuantity = availableQuantity;
+        this.medicamento = medicamento;
     }
 
     public String getLoteNumber() {
         return loteNumber;
     }
 
-    /**
-     * Sets the batch number
-     * @param loteNumber batch identifier
-     */
-    public void setLoteNumber(String loteNumber) {
-        if (loteNumber == null || loteNumber.trim().isEmpty()) {
-            throw new IllegalArgumentException("El número de lote no puede estar vacío");
-        }
-        this.loteNumber = loteNumber.trim();
-    }
-
     public LocalDate getDueDate() {
         return dueDate;
-    }
-
-    /**
-     * Sets expiration date
-     * @param dueDate expiration date
-     */
-    public void setDueDate(LocalDate dueDate) {
-        if (dueDate == null) {
-            throw new IllegalArgumentException("La fecha no puede ser nula");
-        }
-        this.dueDate = dueDate;
     }
 
     public int getAvailableQuantity() {
@@ -82,17 +73,6 @@ public class loteInventario {
 
     public Medicamento getMedicamento() {
         return medicamento;
-    }
-
-    /**
-     * Sets the associated medicine
-     * @param medicamento medicine object
-     */
-    public void setMedicamento(Medicamento medicamento) {
-        if (medicamento == null) {
-            throw new IllegalArgumentException("El medicamento no puede ser nulo");
-        }
-        this.medicamento = medicamento;
     }
 
     /**

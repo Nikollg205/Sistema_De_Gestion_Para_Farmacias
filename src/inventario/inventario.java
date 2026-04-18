@@ -45,11 +45,11 @@ public class inventario implements CrudSimpleInterface<loteInventario> {
 
                 med.setStock(0); // default or calculated
                 med.setName(rs.getString("nombre_medicamento"));
-                med.setDescription("N/A");
+                med.setDescription("Sin descripcion");
                 med.setCode(rs.getInt("código"));
                 med.setPrice(rs.getDouble("precio"));
-                med.setCategory("N/A");
-                med.setMeasurementUnit("N/A");
+                med.setCategory("Sin categoria");
+                med.setMeasurementUnit("Sin especificar");
                 med.setDueDate(rs.getDate("fecha_vencimiento").toLocalDate());
 
                 loteInventario lote = new loteInventario(

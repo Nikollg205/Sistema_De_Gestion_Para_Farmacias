@@ -189,10 +189,6 @@ public class Medicamento {
             throw new IllegalArgumentException("Date cannot be null");
         }
 
-        if (dueDate.isBefore(LocalDate.now())) {
-            throw new IllegalArgumentException("Medicine is expired");
-        }
-
         this.dueDate = dueDate;
     }
 

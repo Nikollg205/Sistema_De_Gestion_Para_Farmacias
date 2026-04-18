@@ -6,7 +6,7 @@ package farmacia;
 
 
 import inventario.inventario;
-import roles.empleado;
+import roles.Empleado;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class Farmacia {
     private static Farmacia instancia;
     private String nombre;
     private inventario inventario;
-    private List<empleado> empleados;
+    private List<Empleado> empleados;
 
     private Farmacia() { } // constructor privado
 

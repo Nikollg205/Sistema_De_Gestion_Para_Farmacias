@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * Represents a batch of a specific medicine in inventory.
  * Each lote has its own expiration date and available quantity.
  */
-public class loteInventario {
+public class LoteInventario {
 
     private final String loteNumber;
     private final LocalDate dueDate;
@@ -23,7 +23,7 @@ public class loteInventario {
      * @param medicamento associated medicine
      * @throws IllegalArgumentException if any argument is invalid
      */
-    public loteInventario(
+    public LoteInventario(
             String loteNumber,
             LocalDate dueDate,
             int availableQuantity,

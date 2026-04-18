@@ -7,12 +7,12 @@ import java.time.LocalDate;
 /**
  * Represents a branded pill medicine
  */
-public class pastillaMarca extends medicamentoPastilla implements TipoComercial {
+public class PastillaMarca extends MedicamentoPastilla implements TipoComercial {
 
     private String brand;
     private String patent;
 
-    public pastillaMarca(
+    public PastillaMarca(
             int stock,
             String name,
             String description,

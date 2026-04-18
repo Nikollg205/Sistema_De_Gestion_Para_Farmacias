@@ -1,8 +1,8 @@
-package inventario;
+package data;
 
 import database.Conexion;
 import data.interfaces.CrudSimpleInterface;
-import inventario.loteInventario;
+import inventario.LoteInventario;
 import medicamentos.Medicamento;
 
 import javax.swing.*;
@@ -13,14 +13,14 @@ import java.util.List;
 /**
  * DAO class for managing inventory batches in database
  */
-public class inventario implements CrudSimpleInterface<loteInventario> {
+public class LoteInventarioDAO implements CrudSimpleInterface<LoteInventario> {
 
     private final Conexion CON;
     private PreparedStatement ps;
     private ResultSet rs;
     private boolean resp;
 
-    public inventario() {
+    public LoteInventarioDAO() {
         CON = Conexion.getInstancia();
     }
 
@@ -28,11 +28,16 @@ public class inventario implements CrudSimpleInterface<loteInventario> {
      * Lists batches filtered by medicine name
      */
     @Override
-    public List<loteInventario> listar(String texto) {
-        List<loteInventario> registros = new ArrayList<>();
+    public List<LoteInventario> listar(String texto) {
+        List<LoteInventario> registros = new ArrayList<>();
 
         try {
-            String sql = "SELECT * FROM lote WHERE nombre_medicamento LIKE ?";
+            String sql = "SELECT l.id_lote, l.fecha_caducidad, " +
+                    "m.id_medicamento, m.nombre_medicamento, m.precio, m.unidad_medida, m.tipo_medicamento " +
+                    "FROM lote l " +
+                    "INNER JOIN medicamento m ON l.id_medicamento = m.id_medicamento " +
+                    "WHERE m.nombre_medicamento LIKE ?";
+
             ps = CON.conectar().prepareStatement(sql);
             ps.setString(1, "%" + texto + "%");
 
@@ -40,22 +45,20 @@ public class inventario implements CrudSimpleInterface<loteInventario> {
 
             while (rs.next()) {
 
-                // ⚠ aquí deberías construir también el Medicamento desde BD
                 Medicamento med = new Medicamento();
 
-                med.setStock(0); // default or calculated
                 med.setName(rs.getString("nombre_medicamento"));
                 med.setDescription("Sin descripcion");
-                med.setCode(rs.getInt("código"));
+                med.setCode(Integer.parseInt(rs.getString("id_medicamento")));
                 med.setPrice(rs.getDouble("precio"));
-                med.setCategory("Sin categoria");
-                med.setMeasurementUnit("Sin especificar");
-                med.setDueDate(rs.getDate("fecha_vencimiento").toLocalDate());
+                med.setCategory(rs.getString("tipo_medicamento"));
+                med.setMeasurementUnit(rs.getString("unidad_medida"));
+                med.setStock(0);
 
-                loteInventario lote = new loteInventario(
-                        rs.getString("lote"),
-                        rs.getDate("fecha_vencimiento").toLocalDate(),
-                        rs.getInt("cantidad"),
+                LoteInventario lote = new LoteInventario(
+                        rs.getString("id_lote"),
+                        rs.getDate("fecha_caducidad").toLocalDate(),
+                        0, // ⚠ no tienes cantidad en BD
                         med
                 );
 
@@ -75,7 +78,7 @@ public class inventario implements CrudSimpleInterface<loteInventario> {
      * Inserts a new batch
      */
     @Override
-    public boolean insertar(loteInventario obj) {
+    public boolean insertar(LoteInventario obj) {
         resp = false;
 
         try {
@@ -102,7 +105,7 @@ public class inventario implements CrudSimpleInterface<loteInventario> {
      * Updates a batch quantity
      */
     @Override
-    public boolean actualizar(loteInventario obj) {
+    public boolean actualizar(LoteInventario obj) {
         resp = false;
 
         try {
@@ -111,49 +114,6 @@ public class inventario implements CrudSimpleInterface<loteInventario> {
             ps = CON.conectar().prepareStatement(sql);
             ps.setInt(1, obj.getAvailableQuantity());
             ps.setString(2, obj.getLoteNumber());
-
-            resp = ps.executeUpdate() > 0;
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } finally {
-            cerrar();
-        }
-
-        return resp;
-    }
-
-    /**
-     * Deactivates a batch (logical delete)
-     */
-    @Override
-    public boolean desactivar(int id) {
-        resp = false;
-
-        try {
-            String sql = "UPDATE lote SET activo=0 WHERE id=?";
-            ps = CON.conectar().prepareStatement(sql);
-            ps.setInt(1, id);
-
-            resp = ps.executeUpdate() > 0;
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } finally {
-            cerrar();
-        }
-
-        return resp;
-    }
-
-    @Override
-    public boolean activar(int id) {
-        resp = false;
-
-        try {
-            String sql = "UPDATE lote SET activo=1 WHERE id=?";
-            ps = CON.conectar().prepareStatement(sql);
-            ps.setInt(1, id);
 
             resp = ps.executeUpdate() > 0;
 

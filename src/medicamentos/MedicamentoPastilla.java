@@ -5,7 +5,7 @@ import java.time.LocalDate;
 /**
  * Abstract class representing a pill-type medicine.
  */
-public abstract class medicamentoPastilla extends Medicamento {
+public abstract class MedicamentoPastilla extends Medicamento {
 
     private int unitCount;
     private String pillType;
@@ -13,7 +13,7 @@ public abstract class medicamentoPastilla extends Medicamento {
     /**
      * Creates a new pill medicine
      */
-    public medicamentoPastilla(
+    public MedicamentoPastilla(
             int stock,
             String name,
             String description,

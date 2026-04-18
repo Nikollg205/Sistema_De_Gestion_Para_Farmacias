@@ -3,7 +3,7 @@ package roles;
 /**
  * Represents an employee of the pharmacy system
  */
-public class empleado {
+public class Empleado {
 
     private int id;
     private String name;
@@ -15,7 +15,7 @@ public class empleado {
     /**
      * Empty constructor for DAO usage
      */
-    public empleado() {
+    public Empleado() {
     }
 
     /**
@@ -28,7 +28,7 @@ public class empleado {
      * @param active status
      * @throws IllegalArgumentException if argument is invalid
      */
-    public empleado(int id, String name, String lastName, String document, String role, boolean active) {
+    public Empleado(int id, String name, String lastName, String document, String role, boolean active) {
         setId(id);
         setName(name);
         setLastName(lastName);

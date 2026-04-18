@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * Abstract class representing a liquid-type medicine.
  * Extends Medicamento and adds liquid-specific attributes.
  */
-public abstract class medicamentoLiquido extends Medicamento {
+public abstract class MedicamentoLiquido extends Medicamento {
 
     private double volumeMl;
     private String liquidType; // syrup, suspension, solution
@@ -17,7 +17,6 @@ public abstract class medicamentoLiquido extends Medicamento {
      * @param name name of the medicine
      * @param description description of the medicine
      * @param code code of the medicine
-     * @param lote lote of the medicine
      * @param price price of the medicine
      * @param category category of the medicine
      * @param measurementUnit measurement unit of the medicine
@@ -26,7 +25,7 @@ public abstract class medicamentoLiquido extends Medicamento {
      * @param liquidType type of liquid
      * @throws IllegalArgumentException if argument is invalid
      */
-    public medicamentoLiquido(
+    public MedicamentoLiquido(
             int stock,
             String name,
             String description,

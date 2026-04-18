@@ -7,7 +7,7 @@ import java.time.LocalDate;
 /**
  * Represents a branded liquid medicine
  */
-public class liquidoMarca extends medicamentoLiquido implements TipoComercial {
+public class LiquidoMarca extends MedicamentoLiquido implements TipoComercial {
 
     private String brand;
     private String patent;
@@ -15,7 +15,7 @@ public class liquidoMarca extends medicamentoLiquido implements TipoComercial {
     /**
      * Creates a new branded liquid medicine
      */
-    public liquidoMarca(
+    public LiquidoMarca(
             int stock,
             String name,
             String description,

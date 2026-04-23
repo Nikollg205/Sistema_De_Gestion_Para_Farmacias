@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-04-2026 a las 05:11:18
+-- Tiempo de generación: 23-04-2026 a las 03:46:20
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -31,7 +31,8 @@ CREATE TABLE `detalle_venta` (
   `id_detalle_venta` varchar(20) NOT NULL,
   `id_factura` varchar(20) DEFAULT NULL,
   `id_medicamento` varchar(20) DEFAULT NULL,
-  `cantidad_vendida` int(11) DEFAULT NULL
+  `cantidad_vendida` int(11) DEFAULT NULL,
+  `descuento` decimal(3,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -46,7 +47,7 @@ CREATE TABLE `factura` (
   `precio_total` decimal(10,2) DEFAULT NULL,
   `sub_total` decimal(10,2) DEFAULT NULL,
   `IVA` decimal(4,2) DEFAULT NULL,
-  `estado_factura` varchar(30) DEFAULT NULL,
+  `estado_factura` varchar(30) DEFAULT 'pendiente',
   `vendedor` varchar(20) DEFAULT NULL,
   `id_detalle_venta` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -89,9 +90,9 @@ CREATE TABLE `inventario` (
 
 CREATE TABLE `lote` (
   `id_lote` varchar(20) NOT NULL,
-  `id_medicamento` varchar(20) DEFAULT NULL,
-  `id_proveedor` varchar(20) DEFAULT NULL,
-  `fecha_caducidad` date DEFAULT NULL
+  `id_medicamento` varchar(20) NOT NULL,
+  `id_proveedor` varchar(20) NOT NULL,
+  `fecha_caducidad` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -172,7 +173,7 @@ CREATE TABLE `usuario` (
   `id_usuario` varchar(20) NOT NULL,
   `id_persona` varchar(20) NOT NULL,
   `nombre_usuario` varchar(30) DEFAULT NULL,
-  `contraseña_usuario` varchar(255) DEFAULT NULL,
+  `contraseña_usuario` varchar(255) NOT NULL,
   `activo` tinyint(1) DEFAULT NULL,
   `ultimo_acceso` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

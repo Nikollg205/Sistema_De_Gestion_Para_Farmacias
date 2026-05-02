@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class inventario implements CrudSimpleInterface<loteInventario> {
 
+    private inventario DAO;
     private final Conexion CON;
     private PreparedStatement ps;
     private ResultSet rs;
@@ -22,6 +23,7 @@ public class inventario implements CrudSimpleInterface<loteInventario> {
 
     public inventario() {
         CON = Conexion.getInstancia();
+        DAO = new inventario();
     }
 
     /**
@@ -214,6 +216,16 @@ public class inventario implements CrudSimpleInterface<loteInventario> {
         }
 
         return resp;
+    }
+    
+    public Medicamento buscar(String nombre){
+        List<loteInventario> lista = DAO.listar(nombre);
+        
+        if (!lista.isEmpty()) {
+            return lista.get(0).getMedicamento(); // devuelve el primero
+        }
+        
+        return null;
     }
 
     /**

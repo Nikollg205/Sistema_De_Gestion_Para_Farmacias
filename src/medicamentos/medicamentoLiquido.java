@@ -17,7 +17,6 @@ public abstract class medicamentoLiquido extends Medicamento {
      * @param name name of the medicine
      * @param description description of the medicine
      * @param code code of the medicine
-     * @param lote lote of the medicine
      * @param price price of the medicine
      * @param category category of the medicine
      * @param measurementUnit measurement unit of the medicine

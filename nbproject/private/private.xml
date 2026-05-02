@@ -3,14 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/samue/Documents/NetBeansProjects/Sistema_farmacia/src/medicamentos/medicamento.java</file>
-            <file>file:/C:/Users/samue/Documents/NetBeansProjects/Sistema_farmacia/src/medicamentos/medicamentoGenerico.java</file>
-            <file>file:/C:/Users/samue/Documents/NetBeansProjects/Sistema_farmacia/src/medicamentos/medicamentoMarca.java</file>
-            <file>file:/C:/Users/samue/Documents/NetBeansProjects/Sistema_farmacia/src/roles/empleado.java</file>
-            <file>file:/C:/Users/samue/Documents/NetBeansProjects/Sistema_farmacia/src/roles/cliente.java</file>
-            <file>file:/C:/Users/samue/Documents/NetBeansProjects/Sistema_farmacia/src/interfaces/autenticable.java</file>
-            <file>file:/C:/Users/samue/Documents/NetBeansProjects/Sistema_farmacia/src/farmacia/farmacia.java</file>
-            <file>file:/C:/Users/samue/Documents/NetBeansProjects/Sistema_farmacia/src/inventario/inventario.java</file>
+            <file>file:/C:/Users/samue/Documents/proyecto%20POO/Sistema_De_Gestion_Para_Farmacias/src/interfaces/Autenticable.java</file>
+            <file>file:/C:/Users/samue/Documents/proyecto%20POO/Sistema_De_Gestion_Para_Farmacias/src/farmacia/Farmacia.java</file>
         </group>
     </open-files>
 </project-private>

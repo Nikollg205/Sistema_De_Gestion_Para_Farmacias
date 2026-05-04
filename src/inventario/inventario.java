@@ -42,7 +42,7 @@ public class inventario implements CrudSimpleInterface<loteInventario> {
 
             while (rs.next()) {
                 Medicamento med = new Medicamento();
-
+                // fix
                 med.setStock(0);
                 med.setName(rs.getString("nombre_medicamento"));
                 med.setDescription("N/A");

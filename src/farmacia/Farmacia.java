@@ -5,7 +5,8 @@
 package farmacia;
 
 
-import inventario.inventario;
+import inventario.LoteInventario;
+import java.util.ArrayList;
 import roles.Empleado;
 
 import java.util.List;
@@ -13,10 +14,13 @@ import java.util.List;
 public class Farmacia {
     private static Farmacia instancia;
     private String nombre;
-    private inventario inventario;
+    private List<LoteInventario> lotes;
     private List<Empleado> empleados;
 
-    private Farmacia() { } // constructor privado
+    private Farmacia() { 
+         lotes = new ArrayList<>();
+         empleados = new ArrayList<>();
+    } // constructor privado
 
     public static Farmacia getInstance() {
         if (instancia == null) {
@@ -24,4 +28,13 @@ public class Farmacia {
         }
         return instancia;
     }
+    public void agregarEmpleado(Empleado empleado){
+        empleados.add(empleado);
+    
+    }
+    public void agregarLote(LoteInventario lote){
+         lotes.add(lote);
+    
+    }
+    
 }

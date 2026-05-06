@@ -3,15 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/samue/Documents/NetBeansProjects/Sistema_De_Gestion_Para_Farmacias/src/database/Conexion.java</file>
-            <file>file:/C:/Users/samue/Documents/NetBeansProjects/Sistema_De_Gestion_Para_Farmacias/src/medicamentos/medicamento.java</file>
-            <file>file:/C:/Users/samue/Documents/NetBeansProjects/Sistema_De_Gestion_Para_Farmacias/src/medicamentos/medicamentoMarca.java</file>
-            <file>file:/C:/Users/samue/Documents/NetBeansProjects/Sistema_De_Gestion_Para_Farmacias/src/medicamentos/medicamentoGenerico.java</file>
-            <file>file:/C:/Users/samue/Documents/NetBeansProjects/Sistema_De_Gestion_Para_Farmacias/src/roles/empleado.java</file>
-            <file>file:/C:/Users/samue/Documents/NetBeansProjects/Sistema_De_Gestion_Para_Farmacias/src/roles/cliente.java</file>
-            <file>file:/C:/Users/samue/Documents/NetBeansProjects/Sistema_De_Gestion_Para_Farmacias/src/interfaces/autenticable.java</file>
-            <file>file:/C:/Users/samue/Documents/NetBeansProjects/Sistema_De_Gestion_Para_Farmacias/src/inventario/inventario.java</file>
-            <file>file:/C:/Users/samue/Documents/NetBeansProjects/Sistema_De_Gestion_Para_Farmacias/src/farmacia/farmacia.java</file>
+            <file>file:/C:/Users/nikol/OneDrive/Sistema_De_Gestion_Para_Farmacias/src/presentacion/Login.java</file>
+            <file>file:/C:/Users/nikol/OneDrive/Sistema_De_Gestion_Para_Farmacias/src/presentacion/SingUp.java</file>
+            <file>file:/C:/Users/nikol/OneDrive/Sistema_De_Gestion_Para_Farmacias/src/presentacion/formPrincipal.java</file>
         </group>
     </open-files>
 </project-private>

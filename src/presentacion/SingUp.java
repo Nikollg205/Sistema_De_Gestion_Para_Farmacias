@@ -73,13 +73,13 @@ public class SingUp extends javax.swing.JFrame {
         jLabel1.setText("Name(*)");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setText("Phone number");
+        jLabel3.setText("Phone number(*)");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setText("Email");
+        jLabel4.setText("Email(*)");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel5.setText("Password");
+        jLabel5.setText("Password(*)");
 
         jLabel2.setBackground(new java.awt.Color(0, 153, 204));
         jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
@@ -92,25 +92,22 @@ public class SingUp extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel2Layout.createSequentialGroup()
                 .addContainerGap(555, Short.MAX_VALUE)
                 .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel2Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtNumberP)
-                        .addComponent(pwPassword)
-                        .addComponent(txtEmail)
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(Panel2Layout.createSequentialGroup()
-                            .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel2Layout.createSequentialGroup()
-                        .addComponent(btnGuardar)
-                        .addGap(51, 51, 51)))
+                    .addComponent(jLabel4)
+                    .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel2Layout.createSequentialGroup()
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(66, 66, 66))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNumberP)
+                            .addComponent(pwPassword)
+                            .addComponent(txtEmail)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel2Layout.createSequentialGroup()
+                            .addComponent(btnGuardar)
+                            .addGap(51, 51, 51))))
                 .addGap(487, 487, 487))
         );
         Panel2Layout.setVerticalGroup(
@@ -127,7 +124,7 @@ public class SingUp extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addComponent(txtNumberP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -163,13 +160,13 @@ public class SingUp extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNameActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String nombre = txtName.getText();
-        String telefono = txtNumberP.getText();
-        String correo = txtEmail.getText();
+        String name = txtName.getText();
+        String phoneNum= txtNumberP.getText();
+        String email = txtEmail.getText();
         String password = new String(pwPassword.getPassword());
 
-    if (nombre.isEmpty() || password.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Nombre y contraseña son obligatorios",
+    if (name.isEmpty() || password.isEmpty()||phoneNum.isEmpty() || email.isEmpty() ) {
+        JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios (*)",
             "Advertencia", JOptionPane.WARNING_MESSAGE);
         return;
     }
@@ -179,7 +176,7 @@ public class SingUp extends javax.swing.JFrame {
         java.sql.Connection cn = con.conectar();
 
         // Generar usuario automático: primernombre + número aleatorio
-        String primerNombre = nombre.split(" ")[0].toLowerCase();
+        String primerNombre = name.split(" ")[0].toLowerCase();
         int numeroAleatorio = (int)(Math.random() * 900) + 100; // número entre 100-999
         String usuarioGenerado = primerNombre + numeroAleatorio;
 
@@ -191,18 +188,19 @@ public class SingUp extends javax.swing.JFrame {
         String sqlPersona = "INSERT INTO personas (id_persona, nombre_persona, telefono_persona, correo_persona, fecha_registro) VALUES (?, ?, ?, ?, NOW())";
         java.sql.PreparedStatement psPersona = cn.prepareStatement(sqlPersona);
         psPersona.setString(1, idPersona);
-        psPersona.setString(2, nombre);
-        psPersona.setString(3, telefono);
-        psPersona.setString(4, correo);
+        psPersona.setString(2, name);
+        psPersona.setString(3, phoneNum);
+        psPersona.setString(4, email);
         psPersona.executeUpdate();
 
         // Insertar en tabla usuarios
-        String sqlUsuario = "INSERT INTO usuario (id_usuario, id_persona, nombre_usuario, contraseña_usuario, activo) VALUES (?, ?, ?, ?, 1)";
+        String sqlUsuario = "INSERT INTO usuario (id_usuario, id_persona, nombre_usuario, contraseña_usuario, activo, ultimo_acceso) VALUES (?, ?, ?, ?, 1, NOW())";
         java.sql.PreparedStatement psUsuario = cn.prepareStatement(sqlUsuario);
         psUsuario.setString(1, idUsuario);
         psUsuario.setString(2, idPersona);
         psUsuario.setString(3, usuarioGenerado);
         psUsuario.setString(4, password);
+        psUsuario.setLong(5, System.currentTimeMillis());
         psUsuario.executeUpdate();
 
         JOptionPane.showMessageDialog(this, "¡Registro exitoso!\nTu usuario es: " + usuarioGenerado + "\n¡Guárdalo para iniciar sesión!");

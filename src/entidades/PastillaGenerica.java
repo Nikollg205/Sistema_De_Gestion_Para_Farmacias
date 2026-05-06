@@ -1,6 +1,7 @@
-package medicamentos;
+package entidades;
 
 import interfaces.Generico;
+import medicamentos.MedicamentoPastilla;
 
 /**
  * Represents a generic pill medicine

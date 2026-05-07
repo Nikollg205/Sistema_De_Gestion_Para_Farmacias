@@ -4,6 +4,7 @@
  */
 package presentacion;
 
+import java.awt.Cursor;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,32 +12,33 @@ import javax.swing.JOptionPane;
  * @author nikol
  */
 public class SingUp extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SingUp.class.getName());
 
     /**
      * Creates new form SingUp
      */
-   public SingUp() {
-    initComponents();
-    setExtendedState(MAXIMIZED_BOTH);
-    setLocationRelativeTo(null);
-    
-    javax.swing.ImageIcon icon = new javax.swing.ImageIcon(
-        getClass().getResource("/imagenes/fondo.png"));
-    java.awt.Image img = icon.getImage().getScaledInstance(
-        java.awt.Toolkit.getDefaultToolkit().getScreenSize().width,
-        java.awt.Toolkit.getDefaultToolkit().getScreenSize().height,
-        java.awt.Image.SCALE_SMOOTH);
-    
-    javax.swing.JLabel lblFondo = new javax.swing.JLabel(new javax.swing.ImageIcon(img));
-    lblFondo.setBounds(0, 0, 
-        java.awt.Toolkit.getDefaultToolkit().getScreenSize().width,
-        java.awt.Toolkit.getDefaultToolkit().getScreenSize().height);
-    
-    Panel2.add(lblFondo);
-    Panel2.setComponentZOrder(lblFondo, Panel2.getComponentCount() - 1);
-}
+    public SingUp() {
+        initComponents();
+        btnLoginReverse.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        setLocationRelativeTo(null);
+
+        textoSombra fullName = new textoSombra("Full Name", txtName);
+        textoSombra phoneNum = new textoSombra("Phone Number", txtPhoneNum);
+        textoSombra email = new textoSombra("Email", txtEmail);
+        textoSombra passwordNew = new textoSombra("Password", psPasswordNew);
+
+        setResizable(false);
+
+        chkShow.addActionListener(e -> {
+            if (chkShow.isSelected()) {
+                psPasswordNew.setEchoChar((char) 0);
+            } else {
+                psPasswordNew.setEchoChar('•');
+            }
+        });
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,171 +49,237 @@ public class SingUp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Panel2 = new javax.swing.JPanel();
-        txtName = new javax.swing.JTextField();
-        txtNumberP = new javax.swing.JTextField();
-        txtEmail = new javax.swing.JTextField();
-        btnGuardar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        pwPassword = new javax.swing.JPasswordField();
-        jLabel2 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel11 = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        btnCreateAccount = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        psPasswordNew = new javax.swing.JPasswordField();
+        txtEmail = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txtPhoneNum = new javax.swing.JTextField();
+        jSeparator5 = new javax.swing.JSeparator();
+        jLabel6 = new javax.swing.JLabel();
+        chkShow = new javax.swing.JCheckBox();
+        btnLoginReverse = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Panel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtName.addActionListener(this::txtNameActionPerformed);
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnGuardar.setBackground(new java.awt.Color(204, 204, 204));
-        btnGuardar.setText("SING UP");
-        btnGuardar.addActionListener(this::btnGuardarActionPerformed);
+        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel9.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("and Simplify Pharmacy Management ");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 420, 50));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setText("Name(*)");
+        jLabel4.setText("Fast • Secure • Reliable");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 740, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setText("Phone number(*)");
+        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel8.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Join HealthFarmacy");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 270, 50));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setText("Email(*)");
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Create Account");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 290, 50));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel5.setText("Password(*)");
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/imagenes/FONDOAZUL.png"))); // NOI18N
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 560, 860));
 
-        jLabel2.setBackground(new java.awt.Color(0, 153, 204));
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jLabel2.setText("SING UP ");
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/imagenes/healthcare.png"))); // NOI18N
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 110, 90));
 
-        javax.swing.GroupLayout Panel2Layout = new javax.swing.GroupLayout(Panel2);
-        Panel2.setLayout(Panel2Layout);
-        Panel2Layout.setHorizontalGroup(
-            Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel2Layout.createSequentialGroup()
-                .addContainerGap(555, Short.MAX_VALUE)
-                .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel2Layout.createSequentialGroup()
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(66, 66, 66))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNumberP)
-                            .addComponent(pwPassword)
-                            .addComponent(txtEmail)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel2Layout.createSequentialGroup()
-                            .addComponent(btnGuardar)
-                            .addGap(51, 51, 51))))
-                .addGap(487, 487, 487))
-        );
-        Panel2Layout.setVerticalGroup(
-            Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Panel2Layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addGap(2, 2, 2)
-                .addComponent(txtNumberP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pwPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(btnGuardar)
-                .addContainerGap(107, Short.MAX_VALUE))
-        );
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel1.setText("Full Name*");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 170, 110, 40));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        jLabel3.setText("HealthFarmacy");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 190, 40));
+
+        jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 250, 290, 10));
+
+        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 470, 300, 10));
+
+        jLabel11.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel11.setText("Email*");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 390, 110, 40));
+
+        txtName.setBackground(new java.awt.Color(0, 0, 0, 0));
+        txtName.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        txtName.setBorder(null);
+        jPanel2.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 212, 290, 40));
+
+        jLabel13.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Create Account");
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 660, -1, -1));
+
+        btnCreateAccount.setBackground(new java.awt.Color(0, 102, 255));
+        btnCreateAccount.setForeground(new java.awt.Color(255, 255, 255));
+        btnCreateAccount.addActionListener(this::btnCreateAccountActionPerformed);
+        jPanel2.add(btnCreateAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 650, 160, 50));
+
+        jLabel14.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel14.setText("Contraseña*");
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 500, 120, 40));
+
+        jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 580, 300, 10));
+
+        psPasswordNew.setBackground(new java.awt.Color(0,0,0,0));
+        psPasswordNew.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        psPasswordNew.setBorder(null);
+        jPanel2.add(psPasswordNew, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 540, 300, 40));
+
+        txtEmail.setBackground(new java.awt.Color(0,0,0,0));
+        txtEmail.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        txtEmail.setBorder(null);
+        jPanel2.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 430, 300, 40));
+
+        jLabel15.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel15.setText("Phone number*");
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 280, 160, 40));
+
+        txtPhoneNum.setBackground(new java.awt.Color(0,0,0,0));
+        txtPhoneNum.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        txtPhoneNum.setBorder(null);
+        txtPhoneNum.addActionListener(this::txtPhoneNumActionPerformed);
+        jPanel2.add(txtPhoneNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 320, 290, 40));
+
+        jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel2.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 360, 290, 10));
+
+        jLabel6.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel6.setText("Already have acount? ");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 720, -1, -1));
+
+        chkShow.setText("Show password");
+        jPanel2.add(chkShow, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 590, -1, -1));
+
+        btnLoginReverse.setForeground(new java.awt.Color(153, 153, 153));
+        btnLoginReverse.setText("Login");
+        btnLoginReverse.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLoginReverseMouseClicked(evt);
+            }
+        });
+        jPanel2.add(btnLoginReverse, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 720, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(1126, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(Panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 786, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 786, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNameActionPerformed
-
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+    private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
         String name = txtName.getText();
-        String phoneNum= txtNumberP.getText();
+        String phoneNum = txtPhoneNum.getText();
         String email = txtEmail.getText();
-        String password = new String(pwPassword.getPassword());
+        String password = new String(psPasswordNew.getPassword());
 
-    if (name.isEmpty() || password.isEmpty()||phoneNum.isEmpty() || email.isEmpty() ) {
-        JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios (*)",
-            "Advertencia", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        if (name.isEmpty() || password.isEmpty() || phoneNum.isEmpty() || email.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios (*)",
+                    "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    try {
-        database.Conexion con = database.Conexion.getInstancia();
-        java.sql.Connection cn = con.conectar();
+        try {
+            database.Conexion con = database.Conexion.getInstancia();
+            java.sql.Connection cn = con.conectar();
 
-        // Generar usuario automático: primernombre + número aleatorio
-        String primerNombre = name.split(" ")[0].toLowerCase();
-        int numeroAleatorio = (int)(Math.random() * 900) + 100; // número entre 100-999
-        String usuarioGenerado = primerNombre + numeroAleatorio;
+            // Generar usuario automático: primernombre + número aleatorio
+            String primerNombre = name.split(" ")[0].toLowerCase();
+            int numeroAleatorio = (int) (Math.random() * 900) + 100; // número entre 100-999
+            String usuarioGenerado = primerNombre + numeroAleatorio;
 
-        // Generar IDs automáticamente
-        String idPersona = "PER-" + System.currentTimeMillis();
-        String idUsuario = "USR-" + System.currentTimeMillis();
+            // Generar IDs automáticamente
+            String idPersona = "PER-" + System.currentTimeMillis();
+            String idUsuario = "USR-" + System.currentTimeMillis();
 
-        // Insertar en tabla personas
-        String sqlPersona = "INSERT INTO personas (id_persona, nombre_persona, telefono_persona, correo_persona, fecha_registro) VALUES (?, ?, ?, ?, NOW())";
-        java.sql.PreparedStatement psPersona = cn.prepareStatement(sqlPersona);
-        psPersona.setString(1, idPersona);
-        psPersona.setString(2, name);
-        psPersona.setString(3, phoneNum);
-        psPersona.setString(4, email);
-        psPersona.executeUpdate();
+            // Insertar en tabla personas
+            String sqlPersona = "INSERT INTO personas (id_persona, nombre_persona, telefono_persona, correo_persona, fecha_registro) VALUES (?, ?, ?, ?, NOW())";
+            java.sql.PreparedStatement psPersona = cn.prepareStatement(sqlPersona);
+            psPersona.setString(1, idPersona);
+            psPersona.setString(2, name);
+            psPersona.setString(3, phoneNum);
+            psPersona.setString(4, email);
+            psPersona.executeUpdate();
 
-        // Insertar en tabla usuarios
-        String sqlUsuario = "INSERT INTO usuario (id_usuario, id_persona, nombre_usuario, contraseña_usuario, activo, ultimo_acceso) VALUES (?, ?, ?, ?, 1, NOW())";
-        java.sql.PreparedStatement psUsuario = cn.prepareStatement(sqlUsuario);
-        psUsuario.setString(1, idUsuario);
-        psUsuario.setString(2, idPersona);
-        psUsuario.setString(3, usuarioGenerado);
-        psUsuario.setString(4, password);
-        psUsuario.setLong(5, System.currentTimeMillis());
-        psUsuario.executeUpdate();
+            // Insertar en tabla usuarios
+            String sqlUsuario = "INSERT INTO usuario (id_usuario, id_persona, nombre_usuario, contraseña_usuario, activo, ultimo_acceso) VALUES (?, ?, ?, ?, 1, NOW())";
+            java.sql.PreparedStatement psUsuario = cn.prepareStatement(sqlUsuario);
+            psUsuario.setString(1, idUsuario);
+            psUsuario.setString(2, idPersona);
+            psUsuario.setString(3, usuarioGenerado);
+            psUsuario.setString(4, password);
+            psUsuario.executeUpdate();
 
-        JOptionPane.showMessageDialog(this, "¡Registro exitoso!\nTu usuario es: " + usuarioGenerado + "\n¡Guárdalo para iniciar sesión!");
-        con.desconectar();
+            JOptionPane.showMessageDialog(this, "¡Registro exitoso!\nTu usuario es: " + usuarioGenerado + "\n¡Guárdalo para iniciar sesión!");
+            con.desconectar();
+            this.dispose();
+            new Login().setVisible(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        }
+
+    }//GEN-LAST:event_btnCreateAccountActionPerformed
+
+    private void txtPhoneNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhoneNumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPhoneNumActionPerformed
+
+    private void btnLoginReverseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginReverseMouseClicked
+        Login lg = new Login();
+        lg.setVisible(true);
+        
         this.dispose();
-        new Login().setVisible(true);
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
-    }
-    }//GEN-LAST:event_btnGuardarActionPerformed
+    }//GEN-LAST:event_btnLoginReverseMouseClicked
 
     /**
      * @param args the command line arguments
@@ -235,20 +303,45 @@ public class SingUp extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
         java.awt.EventQueue.invokeLater(() -> new SingUp().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Panel2;
-    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnCreateAccount;
+    private javax.swing.JLabel btnLoginReverse;
+    private javax.swing.JCheckBox chkShow;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPasswordField pwPassword;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JPasswordField psPasswordNew;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtNumberP;
+    private javax.swing.JTextField txtPhoneNum;
     // End of variables declaration//GEN-END:variables
 }

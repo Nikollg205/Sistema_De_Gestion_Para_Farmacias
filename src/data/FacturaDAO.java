@@ -149,7 +149,11 @@ public class FacturaDAO {
             ps.setDouble(4, obj.getSubTotal());
             ps.setDouble(5, obj.getIva());
             ps.setString(6, obj.getEstado());
-            ps.setString(7, obj.getVendedor());
+            if (obj.getVendedor() != null) {
+                ps.setString(7, obj.getVendedor());
+            } else {
+                ps.setNull(7, java.sql.Types.VARCHAR);
+            }
 
             resp = ps.executeUpdate() > 0;
 

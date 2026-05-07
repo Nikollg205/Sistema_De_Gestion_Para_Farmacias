@@ -449,8 +449,6 @@ public class formInventario extends javax.swing.JPanel {
             }
             actualizarCarritoInfo();
             
-            parent.actualizarCarrito(carrito);
-            
             parent.agregarProducto(id, nombre, lote, precio, cantidad);
             
             JOptionPane.showMessageDialog(this,

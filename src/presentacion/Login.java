@@ -5,6 +5,7 @@
 package presentacion;
 
 import javax.swing.JOptionPane;
+import presentacion.ventanas.formVentas;
 
 public class Login extends javax.swing.JFrame {
 
@@ -179,6 +180,8 @@ public class Login extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(this, "¡Bienvenido " + usuario + "!");
                 con.desconectar();
+                formVentas ventana = new formVentas();
+                ventana.setVisible(true);
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos",

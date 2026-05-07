@@ -15,7 +15,7 @@ public class PastillaGenerica extends MedicamentoPastilla implements Generico {
             int stock,
             String name,
             String description,
-            int code,
+            String code,
             double price,
             String category,
             String measurementUnit,

@@ -1,6 +1,7 @@
-package medicamentos;
+package entidades;
 
 import interfaces.Generico;
+import medicamentos.MedicamentoLiquido;
 
 /**
  * Represents a generic liquid medicine
@@ -17,7 +18,7 @@ public class LiquidoGenerico extends MedicamentoLiquido implements Generico {
             int stock,
             String name,
             String description,
-            int code,
+            String code,
             double price,
             String category,
             String measurementUnit,

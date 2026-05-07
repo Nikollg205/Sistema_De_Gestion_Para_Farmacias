@@ -43,9 +43,8 @@ public class menuModel {
         this.type = type;
     }
     
-    
-    
     public menuModel() {
+        
     }
     
     

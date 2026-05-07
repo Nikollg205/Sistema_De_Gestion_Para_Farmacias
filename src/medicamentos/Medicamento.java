@@ -7,11 +7,14 @@ public class Medicamento {
 
     private String name;
     private String description;
-    private int code;
+    private String code;
     private double price;
     private int stock;
     private String category;
     private String measurementUnit;
+    private int contenidoUnidad;
+    private String tipoForma;
+    private String tipoComercial;
 
     /**
      * Empty constructor for DAO usage
@@ -35,7 +38,7 @@ public class Medicamento {
             int stock,
             String name,
             String description,
-            int code,
+            String code,
             double price,
             String category,
             String measurementUnit
@@ -95,7 +98,7 @@ public class Medicamento {
         this.description = desc;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
@@ -103,11 +106,11 @@ public class Medicamento {
      * Sets the code
      * @param code medicine code
      */
-    public void setCode(int code) {
-        if (code <= 0) {
-            throw new IllegalArgumentException("Code must be > 0");
+    public void setCode(String code) {
+        if (code == null || code.trim().isEmpty()) {
+            throw new IllegalArgumentException("Code cannot be empty");
         }
-        this.code = code;
+        this.code = code.trim();
     }
 
     public double getPrice() {
@@ -168,6 +171,50 @@ public class Medicamento {
             throw new IllegalArgumentException("Measurement unit cannot be empty");
         }
         this.measurementUnit = measurementUnit.trim().toUpperCase();
+    }
+
+    public int getContenidoUnidad() {
+        return contenidoUnidad;
+    }
+
+    /**
+     * Sets content per unit
+     * @param contenidoUnidad units per container
+     */
+    public void setContenidoUnidad(int contenidoUnidad) {
+        if (contenidoUnidad < 0) {
+            throw new IllegalArgumentException("Contenido unidad cannot be negative");
+        }
+        this.contenidoUnidad = contenidoUnidad;
+    }
+
+    public String getTipoForma() {
+        return tipoForma;
+    }
+
+    public void setTipoForma(String tipoForma) {
+        if (tipoForma == null || tipoForma.trim().isEmpty()) {
+            throw new IllegalArgumentException("Tipo forma cannot be empty");
+        }
+        this.tipoForma = tipoForma.trim().toLowerCase();
+    }
+
+    public String getTipoComercial() {
+        return tipoComercial;
+    }
+
+    public void setTipoComercial(String tipoComercial) {
+        if (tipoComercial == null || tipoComercial.trim().isEmpty()) {
+            throw new IllegalArgumentException("Tipo commercial cannot be empty");
+        }
+        this.tipoComercial = tipoComercial.trim().toLowerCase();
+    }
+
+    public void showInfo() {
+        System.out.println("Medicine: " + name);
+        System.out.println("Code: " + code);
+        System.out.println("Price: " + price);
+        System.out.println("Stock: " + stock);
     }
 
 }

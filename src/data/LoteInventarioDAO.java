@@ -32,7 +32,7 @@ public class LoteInventarioDAO implements CrudSimpleInterface<LoteInventario> {
         List<LoteInventario> registros = new ArrayList<>();
 
         try {
-            String sql = "SELECT l.id_lote, l.fecha_caducidad, l.cantidad, " +
+            String sql = "SELECT l.id_lote, l.fecha_caducidad, l.cantidad, l.id_proveedor, " +
                     "m.id_medicamento, m.nombre_medicamento, m.precio, m.formula, m.unidad_medida, m.tipo_medicamento " +
                     "FROM lote l " +
                     "INNER JOIN medicamento m ON l.id_medicamento = m.id_medicamento " +
@@ -55,7 +55,7 @@ public class LoteInventarioDAO implements CrudSimpleInterface<LoteInventario> {
                 }
                 med.setDescription(formula);
 
-                med.setCode(rs.getInt("id_medicamento"));
+                med.setCode(rs.getString("id_medicamento"));
                 med.setPrice(rs.getDouble("precio"));
                 med.setCategory(rs.getString("tipo_medicamento"));
                 med.setMeasurementUnit(rs.getString("unidad_medida"));
@@ -65,7 +65,8 @@ public class LoteInventarioDAO implements CrudSimpleInterface<LoteInventario> {
                         rs.getString("id_lote"),
                         rs.getDate("fecha_caducidad").toLocalDate(),
                         rs.getInt("cantidad"),
-                        med
+                        med,
+                        rs.getString("id_proveedor")
                 );
 
                 registros.add(lote);
@@ -88,13 +89,14 @@ public class LoteInventarioDAO implements CrudSimpleInterface<LoteInventario> {
         resp = false;
 
         try {
-            String sql = "INSERT INTO lote (id_lote, fecha_caducidad, cantidad, id_medicamento) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO lote (id_lote, fecha_caducidad, cantidad, id_medicamento, id_proveedor) VALUES (?,?,?,?,?)";
 
             ps = CON.conectar().prepareStatement(sql);
             ps.setString(1, obj.getLoteNumber());
             ps.setDate(2, Date.valueOf(obj.getDueDate()));
             ps.setInt(3, obj.getAvailableQuantity());
-            ps.setInt(4, obj.getMedicamento().getCode());
+            ps.setString(4, obj.getMedicamento().getCode());
+            ps.setString(5, obj.getIdProveedor());
 
             resp = ps.executeUpdate() > 0;
 

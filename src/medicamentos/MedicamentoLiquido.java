@@ -26,7 +26,7 @@ public abstract class MedicamentoLiquido extends Medicamento {
             int stock,
             String name,
             String description,
-            int code,
+            String code,
             double price,
             String category,
             String measurementUnit,
@@ -38,6 +38,9 @@ public abstract class MedicamentoLiquido extends Medicamento {
         setLiquidType(liquidType);
     }
 
+    /**
+     * Returns the liquid volume
+     */
     public double getVolumeMl() {
         return volumeMl;
     }
@@ -54,6 +57,9 @@ public abstract class MedicamentoLiquido extends Medicamento {
         this.volumeMl = volumeMl;
     }
 
+    /**
+     * Returns the type of liquid
+     */
     public String getLiquidType() {
         return liquidType;
     }
@@ -80,7 +86,7 @@ public abstract class MedicamentoLiquido extends Medicamento {
     }
 
     /**
-     * Displays medicine info
+     * Abstract method for displaying medicine info
      */
     public abstract void showInfo();
 }

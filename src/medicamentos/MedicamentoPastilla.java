@@ -15,7 +15,7 @@ public abstract class MedicamentoPastilla extends Medicamento {
             int stock,
             String name,
             String description,
-            int code,
+            String code,
             double price,
             String category,
             String measurementUnit,
@@ -28,13 +28,27 @@ public abstract class MedicamentoPastilla extends Medicamento {
     }
 
     /**
+     * Returns unit count
+     */
+    public int getUnitCount() {
+        return unitCount;
+    }
+
+    /**
      * Sets unit count
      */
     public void setUnitCount(int unitCount) {
-        if (unitCount <= 0) {
-            throw new IllegalArgumentException("La cantidad de unidades no puede ser menor que 0");
+        if (unitCount < 0) {
+            throw new IllegalArgumentException("La cantidad de unidades no puede ser negativa");
         }
         this.unitCount = unitCount;
+    }
+
+    /**
+     * Returns pill type
+     */
+    public String getPillType() {
+        return pillType;
     }
 
     /**
@@ -54,5 +68,8 @@ public abstract class MedicamentoPastilla extends Medicamento {
         return unitCount + " " + pillType;
     }
 
+    /**
+     * Abstract method for displaying medicine info
+     */
     public abstract void showInfo();
 }

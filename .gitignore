@@ -1,32 +1,42 @@
-#Compilados
+# Compilados
 *.class
 
-#logs
+# Logs
 *.log
 
-#Archivos temporales 
+# Archivos temporales
 *.tmp
 *.swp
 *.bak
+*.swo
+*~
 
-#Carpetas de build 
+# Carpetas de build
 /build/
 /dist/
 /target/
 /out/
+/bin/
 
+# IDE
+.idea/
+*.code-workspace
 
-#Dependecias empaquetadas
-*.jar
-*.war
-*.ear
-
-#NetBeans
+# NetBeans
 /nbproject/private/
 /rbbuild/
 /nbdlist/
 /.nb_gradle/
 
-#Sistema operativo
+# Sistema operativo
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Dependencias descargadas (NO los .jar de lib/)
+/node_modules/

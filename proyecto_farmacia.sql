@@ -134,10 +134,11 @@ CREATE TABLE `personas` (
 
 CREATE TABLE `proveedor` (
   `id_proveedor` varchar(20) NOT NULL,
+  `nombre_proveedor` varchar(30) NOT NULL,
   `producto_proveedor` varchar(20) NOT NULL,
   `telefono_proveedor` varchar(20) DEFAULT NULL,
   `correo_proveedor` varchar(50) DEFAULT NULL,
-  `nombre_proveedor` varchar(30) NOT NULL
+  `estado` varchar(20) DEFAULT 'Activo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

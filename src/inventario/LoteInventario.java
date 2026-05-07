@@ -14,6 +14,7 @@ public class LoteInventario {
     private final LocalDate dueDate;
     private int availableQuantity;
     private final Medicamento medicamento;
+    private String idProveedor;
 
     /**
      * Creates a new inventory batch
@@ -21,13 +22,15 @@ public class LoteInventario {
      * @param dueDate expiration date
      * @param availableQuantity quantity available
      * @param medicamento associated medicine
+     * @param idProveedor supplier ID
      * @throws IllegalArgumentException if any argument is invalid
      */
     public LoteInventario(
             String loteNumber,
             LocalDate dueDate,
             int availableQuantity,
-            Medicamento medicamento
+            Medicamento medicamento,
+            String idProveedor
     ) {
         if (loteNumber == null || loteNumber.trim().isEmpty()) {
             throw new IllegalArgumentException("El número de lote no puede estar vacío");
@@ -41,11 +44,27 @@ public class LoteInventario {
         if (medicamento == null) {
             throw new IllegalArgumentException("El medicamento no puede ser nulo");
         }
+        if (idProveedor == null || idProveedor.trim().isEmpty()) {
+            throw new IllegalArgumentException("El proveedor no puede estar vacío");
+        }
 
         this.loteNumber = loteNumber.trim();
         this.dueDate = dueDate;
         this.availableQuantity = availableQuantity;
         this.medicamento = medicamento;
+        this.idProveedor = idProveedor.trim();
+    }
+
+    /**
+     * Creates a new inventory batch (convenience constructor)
+     */
+    public LoteInventario(
+            String loteNumber,
+            LocalDate dueDate,
+            int availableQuantity,
+            Medicamento medicamento
+    ) {
+        this(loteNumber, dueDate, availableQuantity, medicamento, "PROV001");
     }
 
     public String getLoteNumber() {
@@ -58,6 +77,10 @@ public class LoteInventario {
 
     public int getAvailableQuantity() {
         return availableQuantity;
+    }
+
+    public String getIdProveedor() {
+        return idProveedor;
     }
 
     /**

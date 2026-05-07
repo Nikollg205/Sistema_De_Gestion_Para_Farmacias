@@ -1,6 +1,7 @@
-package medicamentos;
+package entidades;
 
 import interfaces.Marca;
+import medicamentos.MedicamentoPastilla;
 
 /**
  * Represents a branded pill medicine
@@ -14,7 +15,7 @@ public class PastillaMarca extends MedicamentoPastilla implements Marca {
             int stock,
             String name,
             String description,
-            int code,
+            String code,
             double price,
             String category,
             String measurementUnit,

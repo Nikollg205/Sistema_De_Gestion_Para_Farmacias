@@ -38,6 +38,9 @@ import javax.swing.table.TableCellRenderer;
 import data.MedicamentoDAO;
 import medicamentos.Medicamento;
 
+/**
+ * formInventario: clase del proyecto HealthPharmacy.
+ */
 public class formInventario extends javax.swing.JPanel {
     
     private formVentas parent;
@@ -72,16 +75,19 @@ public class formInventario extends javax.swing.JPanel {
         cargarInventario();
     }
 
+    // Metodo formatCOP: logica de interfaz asociada a este formulario/panel.
     private String formatCOP(double value) {
         return COP_FORMAT.format(value).replace("COP", "").trim();
     }
     
+    // Metodo initTable: logica de interfaz asociada a este formulario/panel.
     private void initTable() {
         tableModel = new javax.swing.table.DefaultTableModel(
             new Object[]{"ID", "Nombre", "Descripci\u00F3n", "Lote", "Stock", "Precio", "Estado"},
             0
         ) {
             @Override
+            // Metodo isCellEditable: logica de interfaz asociada a este formulario/panel.
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -118,6 +124,7 @@ public class formInventario extends javax.swing.JPanel {
         // Special alignment overrides
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer() {
             @Override
+            // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
             public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
                 JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
@@ -133,6 +140,7 @@ public class formInventario extends javax.swing.JPanel {
         // Stock column with color
         DefaultTableCellRenderer stockRenderer = new DefaultTableCellRenderer() {
             @Override
+            // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
             public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
                 JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
@@ -156,6 +164,7 @@ public class formInventario extends javax.swing.JPanel {
         // Price column with COP format
         DefaultTableCellRenderer priceRenderer = new DefaultTableCellRenderer() {
             @Override
+            // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
             public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
                 JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
@@ -174,6 +183,7 @@ public class formInventario extends javax.swing.JPanel {
         tblInventario.getColumnModel().getColumn(6).setCellRenderer(statusRenderer);
     }
     
+    // Metodo styleLabel: logica de interfaz asociada a este formulario/panel.
     private void styleLabel(JLabel label, boolean isSelected, int row, int column) {
         if (isSelected) {
             label.setBackground(azulSuave);
@@ -191,6 +201,7 @@ public class formInventario extends javax.swing.JPanel {
     
     class UniversalRenderer extends DefaultTableCellRenderer {
         @Override
+        // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
         public Component getTableCellRendererComponent(JTable table, Object value,
             boolean isSelected, boolean hasFocus, int row, int column) {
             JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
@@ -199,6 +210,7 @@ public class formInventario extends javax.swing.JPanel {
         }
     }
     
+    // Metodo cargarInventario: logica de interfaz asociada a este formulario/panel.
     private void cargarInventario() {
         inventarioData = new ArrayList<>();
         MedicamentoDAO dao = new MedicamentoDAO();
@@ -218,6 +230,7 @@ public class formInventario extends javax.swing.JPanel {
         actualizarTabla();
     }
     
+    // Metodo actualizarTabla: logica de interfaz asociada a este formulario/panel.
     private void actualizarTabla() {
         tableModel.setRowCount(0);
         String filtro = txtBuscar.getText().toLowerCase().trim();
@@ -246,6 +259,7 @@ public class formInventario extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
+    // Metodo initComponents: logica de interfaz asociada a este formulario/panel.
     private void initComponents() {
         panelPrincipal = new javax.swing.JPanel();
         panelHeader = new javax.swing.JPanel();
@@ -307,6 +321,7 @@ public class formInventario extends javax.swing.JPanel {
         txtBuscar.setBackground(blanco);
         txtBuscar.addFocusListener(new FocusAdapter() {
             @Override
+            // Metodo focusGained: logica de interfaz asociada a este formulario/panel.
             public void focusGained(FocusEvent evt) {
                 if (txtBuscar.getText().equals("Buscar producto...")) {
                     txtBuscar.setText("");
@@ -314,6 +329,7 @@ public class formInventario extends javax.swing.JPanel {
                 }
             }
             @Override
+            // Metodo focusLost: logica de interfaz asociada a este formulario/panel.
             public void focusLost(FocusEvent evt) {
                 if (txtBuscar.getText().isEmpty()) {
                     txtBuscar.setText("Buscar producto...");
@@ -323,6 +339,7 @@ public class formInventario extends javax.swing.JPanel {
         });
         txtBuscar.addKeyListener(new KeyAdapter() {
             @Override
+            // Metodo keyReleased: logica de interfaz asociada a este formulario/panel.
             public void keyReleased(KeyEvent evt) {
                 actualizarTabla();
             }
@@ -347,6 +364,7 @@ public class formInventario extends javax.swing.JPanel {
         tblInventario.setRowHeight(46);
         tblInventario.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 int row = tblInventario.rowAtPoint(e.getPoint());
                 if (row >= 0) {
@@ -354,10 +372,12 @@ public class formInventario extends javax.swing.JPanel {
                 }
             }
             @Override
+            // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
             public void mouseEntered(MouseEvent e) {
                 tblInventario.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
             @Override
+            // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
             public void mouseExited(MouseEvent e) {
                 tblInventario.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
@@ -392,6 +412,7 @@ public class formInventario extends javax.swing.JPanel {
         btnIrACarrito.setPreferredSize(new Dimension(160, 38));
         btnIrACarrito.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 parent.cambiarVista("ventas");
             }
@@ -403,6 +424,7 @@ public class formInventario extends javax.swing.JPanel {
         add(panelPrincipal, BorderLayout.CENTER);
     }
 
+    // Metodo agregarProductoSeleccionado: logica de interfaz asociada a este formulario/panel.
     private void agregarProductoSeleccionado(int row) {
         try {
             String id = tableModel.getValueAt(row, 0).toString();
@@ -461,6 +483,7 @@ public class formInventario extends javax.swing.JPanel {
         }
     }
     
+    // Metodo actualizarCarritoInfo: logica de interfaz asociada a este formulario/panel.
     private void actualizarCarritoInfo() {
         int total = 0;
         for (Map<String, Object> item : carrito.values()) {
@@ -500,6 +523,7 @@ public class formInventario extends javax.swing.JPanel {
         }
         
         @Override
+        // Metodo paintBorder: logica de interfaz asociada a este formulario/panel.
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -532,11 +556,13 @@ public class formInventario extends javax.swing.JPanel {
             
             addMouseListener(new MouseAdapter() {
                 @Override
+                // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
                 public void mouseEntered(MouseEvent e) {
                     isHover = true;
                     repaint();
                 }
                 @Override
+                // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
                 public void mouseExited(MouseEvent e) {
                     isHover = false;
                     repaint();
@@ -545,6 +571,7 @@ public class formInventario extends javax.swing.JPanel {
         }
         
         @Override
+        // Metodo paintComponent: logica de interfaz asociada a este formulario/panel.
         protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -566,6 +593,7 @@ public class formInventario extends javax.swing.JPanel {
         }
         
         @Override
+        // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
         public Component getTableCellRendererComponent(JTable table, Object value,
             boolean isSelected, boolean hasFocus, int row, int column) {
             
@@ -592,3 +620,4 @@ public class formInventario extends javax.swing.JPanel {
         }
     }
 }
+

@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
+/**
+ * DAO de roles del sistema (Administrador, Cajero, etc.).
+ */
 public class RolDAO {
 
     private final Conexion CON;
@@ -17,6 +20,7 @@ public class RolDAO {
         CON = Conexion.getInstancia();
     }
 
+    // Lista roles filtrando por nombre.
     public List<Object[]> listar(String texto) {
         List<Object[]> registros = new ArrayList<>();
         try {
@@ -39,6 +43,7 @@ public class RolDAO {
         return registros;
     }
 
+    // Lista compacta de pares id/nombre para combos o selectores.
     public List<String[]> listarNombresIds() {
         List<String[]> lista = new ArrayList<>();
         try {
@@ -56,6 +61,7 @@ public class RolDAO {
         return lista;
     }
 
+    // Inserta un nuevo rol en catálogo.
     public boolean insertar(String idRol, String nombre, String descripcion) {
         resp = false;
         try {
@@ -73,6 +79,7 @@ public class RolDAO {
         return resp;
     }
 
+    // Actualiza nombre y descripción del rol.
     public boolean actualizar(String idRol, String nombre, String descripcion) {
         resp = false;
         try {
@@ -90,6 +97,7 @@ public class RolDAO {
         return resp;
     }
 
+    // Elimina rol por identificador.
     public boolean eliminar(String idRol) {
         resp = false;
         try {
@@ -105,6 +113,7 @@ public class RolDAO {
         return resp;
     }
 
+    // Cuenta total de roles existentes.
     public int total() {
         int total = 0;
         try {
@@ -122,6 +131,7 @@ public class RolDAO {
         return total;
     }
 
+    // Verifica si un nombre de rol ya existe.
     public boolean existe(String nombre) {
         boolean resp = false;
         try {
@@ -138,6 +148,7 @@ public class RolDAO {
         return resp;
     }
 
+    // Libera PreparedStatement, ResultSet y conexión.
     private void cerrar() {
         try {
             if (ps != null) ps.close();

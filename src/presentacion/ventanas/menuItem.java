@@ -12,6 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import models.menuModel;
 
+/**
+ * menuItem: clase del proyecto HealthPharmacy.
+ */
 public class menuItem extends javax.swing.JPanel {
 
     private boolean selected;
@@ -166,3 +169,4 @@ public class menuItem extends javax.swing.JPanel {
     private javax.swing.JLabel lblName;
     // End of variables declaration
 }
+

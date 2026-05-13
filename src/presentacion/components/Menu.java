@@ -11,6 +11,9 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
 import models.menuModel;
 
+/**
+ * Menu: clase del proyecto HealthPharmacy.
+ */
 public class Menu extends javax.swing.JPanel {
 
     public Menu() {
@@ -114,3 +117,4 @@ public class Menu extends javax.swing.JPanel {
     private javax.swing.JPanel panelMoving;
     // End of variables declaration
 }
+

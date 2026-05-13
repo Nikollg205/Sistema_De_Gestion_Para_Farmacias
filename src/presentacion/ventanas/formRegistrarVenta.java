@@ -40,6 +40,9 @@ import data.FacturaDAO;
 import data.MedicamentoDAO;
 import inventario.Factura;
 
+/**
+ * formRegistrarVenta: clase del proyecto HealthPharmacy.
+ */
 public class formRegistrarVenta extends javax.swing.JPanel {
     
     private formVentas parent;
@@ -77,15 +80,18 @@ public class formRegistrarVenta extends javax.swing.JPanel {
         actualizarCarrito();
     }
 
+    // Metodo formatCOP: logica de interfaz asociada a este formulario/panel.
     private String formatCOP(double value) {
         return COP_FORMAT.format(value).replace("COP", "").trim();
     }
     
+    // Metodo initPasos: logica de interfaz asociada a este formulario/panel.
     private void initPasos() {
         cardLayout = (CardLayout) panelContenidoPasos.getLayout();
         actualizarBarraProgreso();
     }
     
+    // Metodo actualizarBarraProgreso: logica de interfaz asociada a este formulario/panel.
     private void actualizarBarraProgreso() {
         lblPaso1Num.setActivo(pasoActual >= 1);
         lblPaso1Num.setCompletado(false);
@@ -141,6 +147,7 @@ public class formRegistrarVenta extends javax.swing.JPanel {
         lblTotalPaso1.setText(formatCOP(total));
     }
     
+    // Metodo actualizarFactura: logica de interfaz asociada a este formulario/panel.
     private void actualizarFactura() {
         panelFactura.removeAll();
         panelFactura.setLayout(new BorderLayout(0, 0));
@@ -283,6 +290,7 @@ public class formRegistrarVenta extends javax.swing.JPanel {
         panelFactura.repaint();
     }
     
+    // Metodo siguientePaso: logica de interfaz asociada a este formulario/panel.
     private void siguientePaso() {
         if (carritoVentas.isEmpty()) {
             JOptionPane.showMessageDialog(this,
@@ -295,11 +303,13 @@ public class formRegistrarVenta extends javax.swing.JPanel {
         actualizarBarraProgreso();
     }
     
+    // Metodo volverPaso: logica de interfaz asociada a este formulario/panel.
     private void volverPaso() {
         pasoActual = 1;
         actualizarBarraProgreso();
     }
     
+    // Metodo finalizarCompra: logica de interfaz asociada a este formulario/panel.
     private void finalizarCompra() {
         if (carritoVentas.isEmpty()) {
             JOptionPane.showMessageDialog(this,
@@ -330,7 +340,7 @@ public class formRegistrarVenta extends javax.swing.JPanel {
             factura.setSubTotal(subtotal);
             factura.setIva(impuesto);
             factura.setEstado("pagada");
-            factura.setVendedor("ROL002");
+            factura.setVendedor(null);
             factura.setIdDetalleVenta("DET" + System.currentTimeMillis() % 100000);
             
             boolean facturaGuardada = facturaDAO.insertar(factura);
@@ -379,6 +389,7 @@ public class formRegistrarVenta extends javax.swing.JPanel {
         }
     }
     
+    // Metodo agregarProducto: logica de interfaz asociada a este formulario/panel.
     public void agregarProducto(String id, String nombre, String lote, double precio, int cantidad) {
         boolean existe = false;
         for (Map<String, Object> item : carritoVentas) {
@@ -404,6 +415,7 @@ public class formRegistrarVenta extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
+    // Metodo initComponents: logica de interfaz asociada a este formulario/panel.
     private void initComponents() {
         panelPrincipal = new javax.swing.JPanel();
         panelHeader = new javax.swing.JPanel();
@@ -515,6 +527,7 @@ public class formRegistrarVenta extends javax.swing.JPanel {
             new String[]{"Producto", "Lote", "Cant.", "Precio", "Subtotal", "Acciones"}
         ) {
             boolean[] canEdit = new boolean[]{false, false, false, false, false, false};
+            // Metodo isCellEditable: logica de interfaz asociada a este formulario/panel.
             public boolean isCellEditable(int row, int column) {
                 return canEdit[column];
             }
@@ -541,6 +554,7 @@ public class formRegistrarVenta extends javax.swing.JPanel {
         // Universal renderer for text columns
         DefaultTableCellRenderer textRenderer = new DefaultTableCellRenderer() {
             @Override
+            // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
             public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
                 JLabel label = (JLabel) super.getTableCellRendererComponent(
@@ -562,6 +576,7 @@ public class formRegistrarVenta extends javax.swing.JPanel {
         // Center columns
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer() {
             @Override
+            // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
             public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
                 JLabel label = (JLabel) super.getTableCellRendererComponent(
@@ -589,6 +604,7 @@ public class formRegistrarVenta extends javax.swing.JPanel {
         // Mouse listener for action buttons
         tblCarrito.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 int col = tblCarrito.columnAtPoint(e.getPoint());
                 int row = tblCarrito.rowAtPoint(e.getPoint());
@@ -632,10 +648,12 @@ public class formRegistrarVenta extends javax.swing.JPanel {
                 }
             }
             @Override
+            // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
             public void mouseEntered(MouseEvent e) {
                 tblCarrito.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
             @Override
+            // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
             public void mouseExited(MouseEvent e) {
                 tblCarrito.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
@@ -739,6 +757,7 @@ public class formRegistrarVenta extends javax.swing.JPanel {
         add(panelPrincipal, BorderLayout.CENTER);
     }
 
+    // Metodo createPrimaryButton: logica de interfaz asociada a este formulario/panel.
     private JButton createPrimaryButton(String text) {
         ModernButton btn = new ModernButton(text, azulPrimario, azulHover);
         btn.setFont(new Font("Segoe UI Semibold", 1, 14));
@@ -746,6 +765,7 @@ public class formRegistrarVenta extends javax.swing.JPanel {
         return btn;
     }
     
+    // Metodo createSecondaryButton: logica de interfaz asociada a este formulario/panel.
     private JButton createSecondaryButton(String text) {
         ModernButton btn = new ModernButton(text, blanco, new Color(241, 245, 249));
         btn.setFont(new Font("Segoe UI Semibold", 1, 14));
@@ -754,6 +774,7 @@ public class formRegistrarVenta extends javax.swing.JPanel {
         return btn;
     }
     
+    // Metodo createSuccessButton: logica de interfaz asociada a este formulario/panel.
     private JButton createSuccessButton(String text) {
         ModernButton btn = new ModernButton(text, verdeExito, verdeHover);
         btn.setFont(new Font("Segoe UI Semibold", 1, 14));
@@ -807,6 +828,7 @@ public class formRegistrarVenta extends javax.swing.JPanel {
         }
         
         @Override
+        // Metodo paintBorder: logica de interfaz asociada a este formulario/panel.
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -838,17 +860,20 @@ public class formRegistrarVenta extends javax.swing.JPanel {
             setFont(new Font("Segoe UI Semibold", 1, 14));
         }
         
+        // Metodo setActivo: logica de interfaz asociada a este formulario/panel.
         public void setActivo(boolean activo) {
             this.activo = activo;
             repaint();
         }
         
+        // Metodo setCompletado: logica de interfaz asociada a este formulario/panel.
         public void setCompletado(boolean completado) {
             this.completado = completado;
             repaint();
         }
         
         @Override
+        // Metodo paintComponent: logica de interfaz asociada a este formulario/panel.
         protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -900,12 +925,14 @@ public class formRegistrarVenta extends javax.swing.JPanel {
             setPreferredSize(new Dimension(48, 3));
         }
         
+        // Metodo setActivo: logica de interfaz asociada a este formulario/panel.
         public void setActivo(boolean activo) {
             this.activo = activo;
             repaint();
         }
         
         @Override
+        // Metodo paintComponent: logica de interfaz asociada a este formulario/panel.
         protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -933,11 +960,13 @@ public class formRegistrarVenta extends javax.swing.JPanel {
             
             addMouseListener(new MouseAdapter() {
                 @Override
+                // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
                 public void mouseEntered(MouseEvent e) {
                     isHover = true;
                     repaint();
                 }
                 @Override
+                // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
                 public void mouseExited(MouseEvent e) {
                     isHover = false;
                     repaint();
@@ -946,6 +975,7 @@ public class formRegistrarVenta extends javax.swing.JPanel {
         }
         
         @Override
+        // Metodo paintComponent: logica de interfaz asociada a este formulario/panel.
         protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -971,6 +1001,7 @@ public class formRegistrarVenta extends javax.swing.JPanel {
         }
         
         @Override
+        // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
         public Component getTableCellRendererComponent(JTable table, Object value,
             boolean isSelected, boolean hasFocus, int row, int column) {
             
@@ -985,6 +1016,7 @@ public class formRegistrarVenta extends javax.swing.JPanel {
         }
         
         @Override
+        // Metodo paintComponent: logica de interfaz asociada a este formulario/panel.
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D) g.create();
@@ -1018,3 +1050,4 @@ public class formRegistrarVenta extends javax.swing.JPanel {
         }
     }
 }
+

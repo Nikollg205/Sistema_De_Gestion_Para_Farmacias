@@ -43,6 +43,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+/**
+ * panelAdminInventario: clase del proyecto HealthPharmacy.
+ */
 public class panelAdminInventario extends javax.swing.JPanel {
     
     private formAdmin parent;
@@ -85,12 +88,14 @@ public class panelAdminInventario extends javax.swing.JPanel {
         cargarDatos();
     }
     
+    // Metodo initTable: logica de interfaz asociada a este formulario/panel.
     private void initTable() {
         tableModel = new DefaultTableModel(
             new Object[]{"Lote", "Medicamento", "Categoria", "Precio", "Cantidad", "Vencimiento", "Estado"},
             0
         ) {
             @Override
+            // Metodo isCellEditable: logica de interfaz asociada a este formulario/panel.
             public boolean isCellEditable(int row, int column) { return false; }
         };
         
@@ -120,6 +125,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
         // Center aligned renderers
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer() {
             @Override
+            // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
             public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
                 JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
@@ -135,6 +141,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
         // Price renderer
         tblInventario.getColumnModel().getColumn(3).setCellRenderer(new DefaultTableCellRenderer() {
             @Override
+            // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
             public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
                 JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
@@ -149,6 +156,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
         // Text aligned renderers
         DefaultTableCellRenderer textRenderer = new DefaultTableCellRenderer() {
             @Override
+            // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
             public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
                 JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
@@ -163,6 +171,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
         tblInventario.getColumnModel().getColumn(6).setCellRenderer(statusRenderer);
     }
     
+    // Metodo styleLabel: logica de interfaz asociada a este formulario/panel.
     private void styleLabel(JLabel label, boolean isSelected, int row) {
         if (isSelected) {
             label.setBackground(blue50);
@@ -175,11 +184,13 @@ public class panelAdminInventario extends javax.swing.JPanel {
         label.setBorder(new EmptyBorder(0, 12, 0, 12));
     }
     
+    // Metodo cargarDatos: logica de interfaz asociada a este formulario/panel.
     private void cargarDatos() {
         actualizarTabla();
         actualizarResumen();
     }
     
+    // Metodo actualizarTabla: logica de interfaz asociada a este formulario/panel.
     private void actualizarTabla() {
         tableModel.setRowCount(0);
         String filtro = txtBuscar.getText().toLowerCase().trim();
@@ -209,6 +220,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
         actualizarResumen();
     }
     
+    // Metodo actualizarResumen: logica de interfaz asociada a este formulario/panel.
     private void actualizarResumen() {
         List<LoteInventario> lista = loteDAO.listar("");
         int totalLotes = lista.size();
@@ -232,6 +244,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
+    // Metodo initComponents: logica de interfaz asociada a este formulario/panel.
     private void initComponents() {
         panelPrincipal = new javax.swing.JPanel();
         panelHeader = new javax.swing.JPanel();
@@ -298,6 +311,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
         txtBuscar.setBackground(white);
         txtBuscar.addFocusListener(new FocusAdapter() {
             @Override
+            // Metodo focusGained: logica de interfaz asociada a este formulario/panel.
             public void focusGained(FocusEvent evt) {
                 if (txtBuscar.getText().equals("Buscar producto...")) {
                     txtBuscar.setText("");
@@ -305,6 +319,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
                 }
             }
             @Override
+            // Metodo focusLost: logica de interfaz asociada a este formulario/panel.
             public void focusLost(FocusEvent evt) {
                 if (txtBuscar.getText().isEmpty()) {
                     txtBuscar.setText("Buscar producto...");
@@ -314,6 +329,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
         });
         txtBuscar.addKeyListener(new KeyAdapter() {
             @Override
+            // Metodo keyReleased: logica de interfaz asociada a este formulario/panel.
             public void keyReleased(KeyEvent evt) { actualizarTabla(); }
         });
         panelSearch.add(txtBuscar, BorderLayout.CENTER);
@@ -353,6 +369,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
         tblInventario.setRowHeight(48);
         tblInventario.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 int row = tblInventario.rowAtPoint(e.getPoint());
                 if (row >= 0 && e.getClickCount() >= 2) {
@@ -360,10 +377,12 @@ public class panelAdminInventario extends javax.swing.JPanel {
                 }
             }
             @Override
+            // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
             public void mouseEntered(MouseEvent e) {
                 tblInventario.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
             @Override
+            // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
             public void mouseExited(MouseEvent e) {
                 tblInventario.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
@@ -381,6 +400,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
         btnAjustarStock.setPreferredSize(new Dimension(140, 40));
         btnAjustarStock.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 ajustarStockMasivo();
             }
@@ -390,6 +410,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
         btnAgregar.setPreferredSize(new Dimension(160, 40));
         btnAgregar.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 mostrarFormularioAgregar();
             }
@@ -428,6 +449,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
         return card;
     }
 
+    // Metodo mostrarFormularioAgregar: logica de interfaz asociada a este formulario/panel.
     private void mostrarFormularioAgregar() {
         JPanel formPanel = new JPanel(new java.awt.GridLayout(5, 2, 12, 12));
         formPanel.setBorder(new EmptyBorder(16, 16, 16, 16));
@@ -512,6 +534,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
         }
     }
     
+    // Metodo ajustarStockMasivo: logica de interfaz asociada a este formulario/panel.
     private void ajustarStockMasivo() {
         int selectedRow = tblInventario.getSelectedRow();
         if (selectedRow < 0) {
@@ -528,12 +551,16 @@ public class panelAdminInventario extends javax.swing.JPanel {
         JTextField txtCantidad = new JTextField();
         txtCantidad.setFont(new Font("Inter", Font.PLAIN, 14));
         txtCantidad.setHorizontalAlignment(JTextField.CENTER);
+        txtCantidad.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(203, 213, 225), 1),
+            BorderFactory.createEmptyBorder(6, 8, 6, 8)
+        ));
         
         String[] opciones = {"Entrada (+)", "Salida (-)", "Ajuste Manual"};
         JComboBox<String> cboTipo = new JComboBox<>(opciones);
         cboTipo.setFont(new Font("Inter", Font.PLAIN, 13));
         
-        JPanel panel = new JPanel(new java.awt.GridLayout(4, 2, 12, 12));
+        JPanel panel = new JPanel(new java.awt.GridLayout(5, 2, 12, 12));
         panel.setBorder(new EmptyBorder(16, 16, 16, 16));
         panel.add(new JLabel("Lote:"));
         panel.add(new JLabel(idLote));
@@ -543,11 +570,25 @@ public class panelAdminInventario extends javax.swing.JPanel {
         panel.add(new JLabel(String.valueOf(stockActual)));
         panel.add(new JLabel("Tipo de Ajuste:"));
         panel.add(cboTipo);
+        panel.add(new JLabel("Cantidad:"));
+        panel.add(txtCantidad);
         
         JPanel inputPanel = new JPanel(new BorderLayout(8, 8));
+        inputPanel.setPreferredSize(new Dimension(430, 260));
         inputPanel.add(panel, BorderLayout.CENTER);
-        
-        int result = JOptionPane.showConfirmDialog(this, inputPanel,
+
+        JLabel helper = new JLabel("Entrada suma, salida resta, ajuste manual reemplaza el stock.");
+        helper.setFont(new Font("Inter", Font.PLAIN, 11));
+        helper.setForeground(slate500);
+        helper.setBorder(new EmptyBorder(0, 16, 8, 16));
+        inputPanel.add(helper, BorderLayout.SOUTH);
+
+        JScrollPane scrollPane = new JScrollPane(inputPanel);
+        scrollPane.setBorder(null);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        scrollPane.setPreferredSize(new Dimension(460, 280));
+
+        int result = JOptionPane.showConfirmDialog(this, scrollPane,
             "Ajustar Stock - " + nombre, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         
         if (result == JOptionPane.OK_OPTION) {
@@ -596,6 +637,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
         }
     }
     
+    // Metodo mostrarDetalle: logica de interfaz asociada a este formulario/panel.
     private void mostrarDetalle(int row) {
         try {
             String lote = tableModel.getValueAt(row, 0).toString();
@@ -654,6 +696,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
             this.color = color; this.thickness = thickness; this.radius = radius;
         }
         @Override
+        // Metodo paintBorder: logica de interfaz asociada a este formulario/panel.
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -686,6 +729,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
             });
         }
         @Override
+        // Metodo paintComponent: logica de interfaz asociada a este formulario/panel.
         protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -704,6 +748,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
             setBorder(new EmptyBorder(6, 12, 6, 12));
         }
         @Override
+        // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
         public Component getTableCellRendererComponent(JTable table, Object value,
             boolean isSelected, boolean hasFocus, int row, int column) {
             String estado = value.toString();
@@ -734,11 +779,14 @@ public class panelAdminInventario extends javax.swing.JPanel {
         }
         
         @Override
+        // Metodo getIconWidth: logica de interfaz asociada a este formulario/panel.
         public int getIconWidth() { return size; }
         @Override
+        // Metodo getIconHeight: logica de interfaz asociada a este formulario/panel.
         public int getIconHeight() { return size; }
         
         @Override
+        // Metodo paintIcon: logica de interfaz asociada a este formulario/panel.
         public void paintIcon(Component c, Graphics g, int x, int y) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -760,10 +808,12 @@ public class panelAdminInventario extends javax.swing.JPanel {
         }
     }
 
+    // Metodo createField: logica de interfaz asociada a este formulario/panel.
     private JTextField createField() {
         return createField("");
     }
 
+    // Metodo createField: logica de interfaz asociada a este formulario/panel.
     private JTextField createField(String placeholder) {
         JTextField field = new JTextField();
         field.setFont(new Font("Inter", Font.PLAIN, 13));
@@ -778,6 +828,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
         }
         field.addFocusListener(new FocusAdapter() {
             @Override
+            // Metodo focusGained: logica de interfaz asociada a este formulario/panel.
             public void focusGained(FocusEvent e) {
                 field.setBorder(BorderFactory.createCompoundBorder(
                     BorderFactory.createLineBorder(new Color(59, 130, 246), 2),
@@ -789,6 +840,7 @@ public class panelAdminInventario extends javax.swing.JPanel {
                 }
             }
             @Override
+            // Metodo focusLost: logica de interfaz asociada a este formulario/panel.
             public void focusLost(FocusEvent e) {
                 field.setBorder(BorderFactory.createCompoundBorder(
                     BorderFactory.createLineBorder(new Color(203, 213, 225), 1),
@@ -803,3 +855,4 @@ public class panelAdminInventario extends javax.swing.JPanel {
         return field;
     }
 }
+

@@ -68,8 +68,8 @@ public class MedicamentoDAO implements CrudSimpleInterface<Medicamento> {
             ps.setInt(6, obj.getStock());
             ps.setInt(7, obj.getContenidoUnidad());
             ps.setString(8, obj.getName());
-            ps.setString(9, obj.getTipoForma());
-            ps.setString(10, obj.getTipoComercial());
+            ps.setString(9, resolverTipoForma(obj));
+            ps.setString(10, resolverTipoComercial(obj));
 
             if (obj instanceof LiquidoGenerico) {
                 LiquidoGenerico lg = (LiquidoGenerico) obj;
@@ -149,8 +149,8 @@ public class MedicamentoDAO implements CrudSimpleInterface<Medicamento> {
             ps.setInt(5, obj.getStock());
             ps.setInt(6, obj.getContenidoUnidad());
             ps.setString(7, obj.getName());
-            ps.setString(8, obj.getTipoForma());
-            ps.setString(9, obj.getTipoComercial());
+            ps.setString(8, resolverTipoForma(obj));
+            ps.setString(9, resolverTipoComercial(obj));
 
             if (obj instanceof LiquidoGenerico) {
                 LiquidoGenerico lg = (LiquidoGenerico) obj;
@@ -409,5 +409,21 @@ public class MedicamentoDAO implements CrudSimpleInterface<Medicamento> {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+    }
+
+    private String resolverTipoForma(Medicamento obj) {
+        String tipo = obj.getTipoForma();
+        if (tipo != null && !tipo.trim().isEmpty()) return tipo.trim().toLowerCase();
+        if (obj instanceof medicamentos.MedicamentoPastilla) return "pastilla";
+        if (obj instanceof medicamentos.MedicamentoLiquido) return "liquido";
+        return "pastilla";
+    }
+
+    private String resolverTipoComercial(Medicamento obj) {
+        String tipo = obj.getTipoComercial();
+        if (tipo != null && !tipo.trim().isEmpty()) return tipo.trim().toLowerCase();
+        if (obj instanceof interfaces.Generico) return "generico";
+        if (obj instanceof interfaces.Marca) return "marca";
+        return "generico";
     }
 }

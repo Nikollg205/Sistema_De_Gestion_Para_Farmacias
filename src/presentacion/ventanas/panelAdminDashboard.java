@@ -34,6 +34,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * panelAdminDashboard: clase del proyecto HealthPharmacy.
+ */
 public class panelAdminDashboard extends javax.swing.JPanel {
     
     private formAdmin parent;
@@ -80,10 +83,12 @@ public class panelAdminDashboard extends javax.swing.JPanel {
         initRecentActivity();
     }
     
+    // Metodo formatCOP: logica de interfaz asociada a este formulario/panel.
     private String formatCOP(double value) {
         return COP_FORMAT.format(value).replace("COP", "").trim();
     }
     
+    // Metodo initCards: logica de interfaz asociada a este formulario/panel.
     private void initCards() {
         cardPanel.removeAll();
         cardPanel.setLayout(new java.awt.GridLayout(1, 4, 16, 0));
@@ -104,6 +109,7 @@ public class panelAdminDashboard extends javax.swing.JPanel {
         cardPanel.repaint();
     }
     
+    // Metodo initStats: logica de interfaz asociada a este formulario/panel.
     private void initStats() {
         statsPanel.removeAll();
         statsPanel.setLayout(new BorderLayout(0, 0));
@@ -163,10 +169,13 @@ public class panelAdminDashboard extends javax.swing.JPanel {
             bp.setCursor(new Cursor(Cursor.HAND_CURSOR));
             bp.addMouseListener(new MouseAdapter() {
                 @Override
+                // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
                 public void mouseEntered(MouseEvent e) { bp.setHover(true); repaint(); }
                 @Override
+                // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
                 public void mouseExited(MouseEvent e) { bp.setHover(false); repaint(); }
                 @Override
+                // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
                 public void mouseClicked(MouseEvent e) {
                     JOptionPane.showMessageDialog(panelAdminDashboard.this,
                         "Ventas del " + days[idx] + ": " + formatCOP(valor),
@@ -192,6 +201,7 @@ public class panelAdminDashboard extends javax.swing.JPanel {
         statsPanel.repaint();
     }
     
+    // Metodo initRecentActivity: logica de interfaz asociada a este formulario/panel.
     private void initRecentActivity() {
         activityPanel.removeAll();
         activityPanel.setLayout(new BorderLayout());
@@ -211,13 +221,16 @@ public class panelAdminDashboard extends javax.swing.JPanel {
         lblViewAll.setCursor(new Cursor(Cursor.HAND_CURSOR));
         lblViewAll.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 JOptionPane.showMessageDialog(panelAdminDashboard.this,
                     "Modulo de actividad en desarrollo", "Informacion", JOptionPane.INFORMATION_MESSAGE);
             }
             @Override
+            // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
             public void mouseEntered(MouseEvent e) { lblViewAll.setForeground(blue700); }
             @Override
+            // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
             public void mouseExited(MouseEvent e) { lblViewAll.setForeground(blue600); }
         });
         header.add(lblViewAll, BorderLayout.EAST);
@@ -253,6 +266,7 @@ public class panelAdminDashboard extends javax.swing.JPanel {
         activityPanel.repaint();
     }
     
+    // Metodo addActivityItem: logica de interfaz asociada a este formulario/panel.
     private void addActivityItem(String tipo, String detalle, String hora, Color color, String icon, JPanel parent) {
         JPanel row = new JPanel(new BorderLayout(12, 0));
         row.setBackground(white);
@@ -261,6 +275,7 @@ public class panelAdminDashboard extends javax.swing.JPanel {
         // Icon circle
         JPanel iconPanel = new JPanel() {
             @Override
+            // Metodo paintComponent: logica de interfaz asociada a este formulario/panel.
             protected void paintComponent(Graphics g) {
                 Graphics2D g2 = (Graphics2D) g.create();
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -304,6 +319,7 @@ public class panelAdminDashboard extends javax.swing.JPanel {
         parent.add(row);
     }
     
+    // Metodo drawIcon: logica de interfaz asociada a este formulario/panel.
     private void drawIcon(Graphics2D g2, String name, Color color) {
         switch (name) {
             case "check-circle":
@@ -343,6 +359,7 @@ public class panelAdminDashboard extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
+    // Metodo initComponents: logica de interfaz asociada a este formulario/panel.
     private void initComponents() {
         panelPrincipal = new javax.swing.JPanel();
         panelHeader = new javax.swing.JPanel();
@@ -407,6 +424,7 @@ public class panelAdminDashboard extends javax.swing.JPanel {
         btnReporte.setPreferredSize(new Dimension(150, 38));
         btnReporte.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 JOptionPane.showMessageDialog(panelAdminDashboard.this,
                     "Modulo de reportes en desarrollo", "Informacion", JOptionPane.INFORMATION_MESSAGE);
@@ -478,16 +496,19 @@ public class panelAdminDashboard extends javax.swing.JPanel {
             
             addMouseListener(new MouseAdapter() {
                 @Override
+                // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
                 public void mouseEntered(MouseEvent e) {
                     setBackground(bgTint);
                     repaint();
                 }
                 @Override
+                // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
                 public void mouseExited(MouseEvent e) {
                     setBackground(white);
                     repaint();
                 }
                 @Override
+                // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
                 public void mouseClicked(MouseEvent e) {
                     JOptionPane.showMessageDialog(panelAdminDashboard.this,
                         "Detalle de " + titulo + ": " + valor,
@@ -497,6 +518,7 @@ public class panelAdminDashboard extends javax.swing.JPanel {
         }
         
         @Override
+        // Metodo paintComponent: logica de interfaz asociada a este formulario/panel.
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D) g.create();
@@ -549,9 +571,11 @@ public class panelAdminDashboard extends javax.swing.JPanel {
             setOpaque(false);
         }
         
+        // Metodo setHover: logica de interfaz asociada a este formulario/panel.
         public void setHover(boolean h) { isHover = h; repaint(); }
         
         @Override
+        // Metodo paintComponent: logica de interfaz asociada a este formulario/panel.
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D) g.create();
@@ -579,6 +603,7 @@ public class panelAdminDashboard extends javax.swing.JPanel {
             this.color = color; this.thickness = thickness; this.radius = radius;
         }
         @Override
+        // Metodo paintBorder: logica de interfaz asociada a este formulario/panel.
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -613,6 +638,7 @@ public class panelAdminDashboard extends javax.swing.JPanel {
         }
         
         @Override
+        // Metodo paintComponent: logica de interfaz asociada a este formulario/panel.
         protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -623,3 +649,4 @@ public class panelAdminDashboard extends javax.swing.JPanel {
         }
     }
 }
+

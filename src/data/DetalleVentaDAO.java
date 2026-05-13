@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
+/**
+ * DetalleVentaDAO: clase del proyecto HealthPharmacy.
+ */
 public class DetalleVentaDAO {
 
     private final Conexion CON;
@@ -118,3 +121,4 @@ public class DetalleVentaDAO {
         }
     }
 }
+

@@ -21,6 +21,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * panelDashboard: clase del proyecto HealthPharmacy.
+ */
 public class panelDashboard extends javax.swing.JPanel {
     
     private formVentas parent;
@@ -46,6 +49,7 @@ public class panelDashboard extends javax.swing.JPanel {
         initQuickStats();
     }
     
+    // Metodo initCards: logica de interfaz asociada a este formulario/panel.
     private void initCards() {
         cardPanel.removeAll();
         cardPanel.setLayout(new java.awt.GridLayout(1, 3, 20, 0));
@@ -79,6 +83,7 @@ public class panelDashboard extends javax.swing.JPanel {
         cardPanel.repaint();
     }
     
+    // Metodo initQuickStats: logica de interfaz asociada a este formulario/panel.
     private void initQuickStats() {
         statsPanel.removeAll();
         statsPanel.setLayout(new java.awt.GridLayout(1, 4, 18, 0));
@@ -125,6 +130,7 @@ public class panelDashboard extends javax.swing.JPanel {
         statsPanel.repaint();
     }
     
+    // Metodo formatMoney: logica de interfaz asociada a este formulario/panel.
     private String formatMoney(double value) {
         if (value >= 1000000) {
             return "$" + (value / 1000000) + "M";
@@ -135,6 +141,7 @@ public class panelDashboard extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
+    // Metodo initComponents: logica de interfaz asociada a este formulario/panel.
     private void initComponents() {
         panelPrincipal = new javax.swing.JPanel();
         panelHeader = new javax.swing.JPanel();
@@ -168,7 +175,7 @@ public class panelDashboard extends javax.swing.JPanel {
 
         lblBienvenida.setFont(new Font("Segoe UI Semibold", 1, 28));
         lblBienvenida.setForeground(azulProfundo);
-        lblBienvenida.setText("Panel de Control");
+        lblBienvenida.setText("HealthPharmacy");
         panelTitulo.add(lblBienvenida);
 
         lblSubtitulo.setFont(new Font("Segoe UI", 0, 14));
@@ -237,11 +244,13 @@ public class panelDashboard extends javax.swing.JPanel {
         add(panelPrincipal, BorderLayout.CENTER);
     }
 
+    // Metodo getFechaCorta: logica de interfaz asociada a este formulario/panel.
     private String getFechaCorta() {
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("EEE, dd MMM yyyy");
         return sdf.format(new java.util.Date()).toUpperCase();
     }
     
+    // Metodo getHora: logica de interfaz asociada a este formulario/panel.
     private String getHora() {
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm");
         return sdf.format(new java.util.Date());
@@ -276,6 +285,7 @@ public class panelDashboard extends javax.swing.JPanel {
         }
         
         @Override
+        // Metodo paintBorder: logica de interfaz asociada a este formulario/panel.
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -310,15 +320,18 @@ public class panelDashboard extends javax.swing.JPanel {
             
             addMouseListener(new MouseAdapter() {
                 @Override
+                // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
                 public void mouseClicked(MouseEvent e) {
                     if (action != null) action.run();
                 }
                 @Override
+                // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
                 public void mouseEntered(MouseEvent e) {
                     hover = true;
                     repaint();
                 }
                 @Override
+                // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
                 public void mouseExited(MouseEvent e) {
                     hover = false;
                     repaint();
@@ -366,6 +379,7 @@ public class panelDashboard extends javax.swing.JPanel {
         }
         
         @Override
+        // Metodo paintComponent: logica de interfaz asociada a este formulario/panel.
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D) g.create();
@@ -424,11 +438,13 @@ public class panelDashboard extends javax.swing.JPanel {
             
             addMouseListener(new MouseAdapter() {
                 @Override
+                // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
                 public void mouseEntered(MouseEvent e) {
                     setBackground(blancoGris);
                     repaint();
                 }
                 @Override
+                // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
                 public void mouseExited(MouseEvent e) {
                     setBackground(blanco);
                     repaint();
@@ -438,6 +454,7 @@ public class panelDashboard extends javax.swing.JPanel {
         }
         
         @Override
+        // Metodo paintComponent: logica de interfaz asociada a este formulario/panel.
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D) g.create();
@@ -494,3 +511,4 @@ public class panelDashboard extends javax.swing.JPanel {
         }
     }
 }
+

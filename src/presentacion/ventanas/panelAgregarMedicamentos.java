@@ -44,6 +44,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+/**
+ * panelAgregarMedicamentos: clase del proyecto HealthPharmacy.
+ */
 public class panelAgregarMedicamentos extends javax.swing.JPanel {
     
     private formAdmin parent;
@@ -82,12 +85,14 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         cargarDatos();
     }
     
+    // Metodo initTable: logica de interfaz asociada a este formulario/panel.
     private void initTable() {
         tableModel = new DefaultTableModel(
             new Object[]{"ID", "Medicamento", "Categoria", "Precio", "Stock", "Formula", "Estado"},
             0
         ) {
             @Override
+            // Metodo isCellEditable: logica de interfaz asociada a este formulario/panel.
             public boolean isCellEditable(int row, int column) { return false; }
         };
         
@@ -117,6 +122,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         // Center aligned renderers
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer() {
             @Override
+            // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
             public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
                 JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
@@ -128,6 +134,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         tblMedicamentos.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
         tblMedicamentos.getColumnModel().getColumn(3).setCellRenderer(new DefaultTableCellRenderer() {
             @Override
+            // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
             public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
                 JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
@@ -141,6 +148,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         tblMedicamentos.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
         tblMedicamentos.getColumnModel().getColumn(5).setCellRenderer(new DefaultTableCellRenderer() {
             @Override
+            // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
             public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
                 JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
@@ -153,6 +161,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         // Text aligned renderers
         DefaultTableCellRenderer textRenderer = new DefaultTableCellRenderer() {
             @Override
+            // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
             public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
                 JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
@@ -167,6 +176,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         tblMedicamentos.getColumnModel().getColumn(6).setCellRenderer(statusRenderer);
     }
     
+    // Metodo styleLabel: logica de interfaz asociada a este formulario/panel.
     private void styleLabel(JLabel label, boolean isSelected, int row) {
         if (isSelected) {
             label.setBackground(blue50);
@@ -179,10 +189,12 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         label.setBorder(new EmptyBorder(0, 12, 0, 12));
     }
     
+    // Metodo cargarDatos: logica de interfaz asociada a este formulario/panel.
     private void cargarDatos() {
         actualizarTabla();
     }
     
+    // Metodo actualizarTabla: logica de interfaz asociada a este formulario/panel.
     private void actualizarTabla() {
         tableModel.setRowCount(0);
         String filtro = txtBuscar.getText().toLowerCase().trim();
@@ -205,6 +217,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
+    // Metodo initComponents: logica de interfaz asociada a este formulario/panel.
     private void initComponents() {
         panelPrincipal = new javax.swing.JPanel();
         panelHeader = new javax.swing.JPanel();
@@ -267,6 +280,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         txtBuscar.setBackground(white);
         txtBuscar.addFocusListener(new FocusAdapter() {
             @Override
+            // Metodo focusGained: logica de interfaz asociada a este formulario/panel.
             public void focusGained(FocusEvent evt) {
                 if (txtBuscar.getText().equals("Buscar medicamento...")) {
                     txtBuscar.setText("");
@@ -274,6 +288,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
                 }
             }
             @Override
+            // Metodo focusLost: logica de interfaz asociada a este formulario/panel.
             public void focusLost(FocusEvent evt) {
                 if (txtBuscar.getText().isEmpty()) {
                     txtBuscar.setText("Buscar medicamento...");
@@ -283,6 +298,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         });
         txtBuscar.addKeyListener(new KeyAdapter() {
             @Override
+            // Metodo keyReleased: logica de interfaz asociada a este formulario/panel.
             public void keyReleased(KeyEvent evt) { actualizarTabla(); }
         });
         panelSearch.add(txtBuscar, BorderLayout.CENTER);
@@ -305,6 +321,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         tblMedicamentos.setRowHeight(48);
         tblMedicamentos.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 int row = tblMedicamentos.rowAtPoint(e.getPoint());
                 if (row >= 0 && e.getClickCount() >= 2) {
@@ -312,10 +329,12 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
                 }
             }
             @Override
+            // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
             public void mouseEntered(MouseEvent e) {
                 tblMedicamentos.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
             @Override
+            // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
             public void mouseExited(MouseEvent e) {
                 tblMedicamentos.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
@@ -333,6 +352,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         btnAgregar.setPreferredSize(new Dimension(200, 40));
         btnAgregar.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 mostrarFormularioAgregar();
             }
@@ -344,10 +364,12 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         add(panelPrincipal, BorderLayout.CENTER);
     }
 
+    // Metodo mostrarFormularioAgregar: logica de interfaz asociada a este formulario/panel.
     private void mostrarFormularioAgregar() {
         JPanel formPanel = new JPanel(new GridBagLayout());
         formPanel.setBackground(white);
         formPanel.setBorder(new EmptyBorder(20, 24, 20, 24));
+        formPanel.setPreferredSize(new Dimension(420, 820));
         
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -384,7 +406,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         JPanel panelCamposEspecificos = new JPanel(new GridBagLayout());
         panelCamposEspecificos.setBackground(slate50);
         panelCamposEspecificos.setBorder(new RoundedBorder(slate200, 1, 8));
-        panelCamposEspecificos.setPreferredSize(new Dimension(320, 80));
+        panelCamposEspecificos.setPreferredSize(new Dimension(320, 210));
         
         JTextField txtIngredienteActivo = createField();
         JTextField txtLaboratorio = createField();
@@ -458,8 +480,15 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         
         txtNombreMedicamento.requestFocusInWindow();
         
-        JOptionPane optionPane = new JOptionPane(formPanel, JOptionPane.PLAIN_MESSAGE, JOptionPane.NO_OPTION);
-        optionPane.createDialog(this, "Nuevo Medicamento").setVisible(true);
+        JScrollPane formScroll = new JScrollPane(formPanel);
+        formScroll.setBorder(null);
+        formScroll.getVerticalScrollBar().setUnitIncrement(16);
+        formScroll.setPreferredSize(new Dimension(500, 620));
+
+        JOptionPane optionPane = new JOptionPane(formScroll, JOptionPane.PLAIN_MESSAGE, JOptionPane.NO_OPTION);
+        javax.swing.JDialog dialog = optionPane.createDialog(this, "Nuevo Medicamento");
+        dialog.setResizable(true);
+        dialog.setVisible(true);
         
         if (!saved[0]) return;
         
@@ -518,6 +547,8 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
                 med = new entidades.LiquidoMarca(stock, nombre, formula.isEmpty() ? "Sin formula especificada" : formula, idMed, precio, categoria, unidad.isEmpty() ? "UND" : unidad, volumeMl, liquidType, brand, patent);
             }
             
+            med.setTipoForma(forma);
+            med.setTipoComercial(comercial);
             boolean exito = medicamentoDAO.insertar(med);
             
             if (exito) {
@@ -537,6 +568,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         }
     }
     
+    // Metodo createField: logica de interfaz asociada a este formulario/panel.
     private JTextField createField() {
         JTextField field = new JTextField();
         field.setFont(new Font("Inter", Font.PLAIN, 13));
@@ -548,10 +580,12 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         field.setMargin(new Insets(4, 10, 4, 10));
         field.addFocusListener(new FocusAdapter() {
             @Override
+            // Metodo focusGained: logica de interfaz asociada a este formulario/panel.
             public void focusGained(FocusEvent e) {
                 field.setBorder(new LineBorder(blue500, 2, true));
             }
             @Override
+            // Metodo focusLost: logica de interfaz asociada a este formulario/panel.
             public void focusLost(FocusEvent e) {
                 field.setBorder(new LineBorder(slate200, 1, true));
             }
@@ -559,6 +593,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         return field;
     }
     
+    // Metodo createDialogBtn: logica de interfaz asociada a este formulario/panel.
     private JButton createDialogBtn(String text, Color bg, Color fg) {
         JButton btn = new JButton(text);
         btn.setFont(new Font("Inter", Font.BOLD, 12));
@@ -581,6 +616,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         return btn;
     }
     
+    // Metodo updateCamposEspecificos: logica de interfaz asociada a este formulario/panel.
     private void updateCamposEspecificos(JPanel panel, JComboBox<String> cboForma, JComboBox<String> cboTipoComercial,
             JTextField txtIngredienteActivo, JTextField txtLaboratorio, JTextField txtMarca, JTextField txtPatente,
             JTextField txtVolumenMl, JTextField txtTipoLiquido, JTextField txtCantidadUnidades, JTextField txtTipoPastilla) {
@@ -621,6 +657,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         panel.repaint();
     }
     
+    // Metodo addCampoExtra: logica de interfaz asociada a este formulario/panel.
     private void addCampoExtra(JPanel panel, GridBagConstraints gbc, int row, String labelText, JTextField field) {
         gbc.gridy = row * 2;
         gbc.weightx = 0;
@@ -636,6 +673,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         panel.add(field, gbc);
     }
     
+    // Metodo mostrarDetalle: logica de interfaz asociada a este formulario/panel.
     private void mostrarDetalle(int row) {
         try {
             String id = tableModel.getValueAt(row, 0).toString();
@@ -679,6 +717,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
             this.color = color; this.thickness = thickness; this.radius = radius;
         }
         @Override
+        // Metodo paintBorder: logica de interfaz asociada a este formulario/panel.
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -711,6 +750,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
             });
         }
         @Override
+        // Metodo paintComponent: logica de interfaz asociada a este formulario/panel.
         protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -729,6 +769,7 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
             setBorder(new EmptyBorder(6, 12, 6, 12));
         }
         @Override
+        // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
         public Component getTableCellRendererComponent(JTable table, Object value,
             boolean isSelected, boolean hasFocus, int row, int column) {
             String estado = value.toString();
@@ -755,11 +796,14 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         }
         
         @Override
+        // Metodo getIconWidth: logica de interfaz asociada a este formulario/panel.
         public int getIconWidth() { return size; }
         @Override
+        // Metodo getIconHeight: logica de interfaz asociada a este formulario/panel.
         public int getIconHeight() { return size; }
         
         @Override
+        // Metodo paintIcon: logica de interfaz asociada a este formulario/panel.
         public void paintIcon(Component c, Graphics g, int x, int y) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -785,3 +829,4 @@ public class panelAgregarMedicamentos extends javax.swing.JPanel {
         }
     }
 }
+

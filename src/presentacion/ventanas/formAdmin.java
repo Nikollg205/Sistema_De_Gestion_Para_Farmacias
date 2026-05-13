@@ -21,7 +21,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import presentacion.Login;
+import roles.SesionUsuario;
 
+/**
+ * Ventana principal del rol Administrador.
+ * Contiene navegación lateral y módulos de gestión (inventario, proveedores, etc.).
+ */
 public class formAdmin extends javax.swing.JFrame {
     
     private CardLayout cardLayout;
@@ -31,7 +36,7 @@ public class formAdmin extends javax.swing.JFrame {
     private panelGestionProveedores proveedoresPanel;
     private panelAdminInventario inventarioPanel;
     
-    // Design tokens - Semantic color system
+    // Design tokens: paleta central para mantener consistencia visual.
     private Color slate900 = new Color(15, 23, 42);
     private Color slate800 = new Color(30, 41, 59);
     private Color slate700 = new Color(51, 65, 85);
@@ -63,6 +68,7 @@ public class formAdmin extends javax.swing.JFrame {
         seleccionarBoton(btnDashboard);
     }
     
+    // Registra paneles hijos dentro del CardLayout principal.
     private void cargarPaneles() {
         cardLayout = (CardLayout) panelContenido.getLayout();
         
@@ -79,10 +85,12 @@ public class formAdmin extends javax.swing.JFrame {
         panelContenido.add(inventarioPanel, "inventario");
     }
     
+    // Cambia la vista activa del contenedor central.
     public void cambiarVista(String vista) {
         cardLayout.show(panelContenido, vista);
     }
     
+    // Actualiza estado visual del menú lateral (item activo vs inactivo).
     private void seleccionarBoton(JPanel boton) {
         // Reset all buttons
         btnDashboard.setBackground(sidebarItem);
@@ -110,6 +118,7 @@ public class formAdmin extends javax.swing.JFrame {
         panelNavegacion.repaint();
     }
     
+    // Cierra sesión actual y retorna al Login si el usuario confirma.
     public void mostrarConfirmacionSalida() {
         int result = JOptionPane.showConfirmDialog(
             this,
@@ -120,6 +129,7 @@ public class formAdmin extends javax.swing.JFrame {
         );
         
         if (result == JOptionPane.YES_OPTION) {
+            SesionUsuario.getInstancia().cerrarSesion();
             this.dispose();
             new Login().setVisible(true);
         }
@@ -142,6 +152,7 @@ public class formAdmin extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
+    // Metodo initComponents: logica de interfaz asociada a este formulario/panel.
     private void initComponents() {
         panelPrincipal = new javax.swing.JPanel();
         panelSidebar = new javax.swing.JPanel();
@@ -218,15 +229,18 @@ public class formAdmin extends javax.swing.JFrame {
         ));
         btnDashboard.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 seleccionarBoton(btnDashboard);
                 cambiarVista("dashboard");
             }
             @Override
+            // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
             public void mouseEntered(MouseEvent e) {
                 if (panelActivo != btnDashboard) btnDashboard.setBackground(sidebarHover);
             }
             @Override
+            // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
             public void mouseExited(MouseEvent e) {
                 if (panelActivo != btnDashboard) btnDashboard.setBackground(sidebarItem);
             }
@@ -251,15 +265,18 @@ public class formAdmin extends javax.swing.JFrame {
         ));
         btnMedicamentos.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 seleccionarBoton(btnMedicamentos);
                 cambiarVista("medicamentos");
             }
             @Override
+            // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
             public void mouseEntered(MouseEvent e) {
                 if (panelActivo != btnMedicamentos) btnMedicamentos.setBackground(sidebarHover);
             }
             @Override
+            // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
             public void mouseExited(MouseEvent e) {
                 if (panelActivo != btnMedicamentos) btnMedicamentos.setBackground(sidebarItem);
             }
@@ -284,15 +301,18 @@ public class formAdmin extends javax.swing.JFrame {
         ));
         btnProveedores.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 seleccionarBoton(btnProveedores);
                 cambiarVista("proveedores");
             }
             @Override
+            // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
             public void mouseEntered(MouseEvent e) {
                 if (panelActivo != btnProveedores) btnProveedores.setBackground(sidebarHover);
             }
             @Override
+            // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
             public void mouseExited(MouseEvent e) {
                 if (panelActivo != btnProveedores) btnProveedores.setBackground(sidebarItem);
             }
@@ -317,15 +337,18 @@ public class formAdmin extends javax.swing.JFrame {
         ));
         btnInventario.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 seleccionarBoton(btnInventario);
                 cambiarVista("inventario");
             }
             @Override
+            // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
             public void mouseEntered(MouseEvent e) {
                 if (panelActivo != btnInventario) btnInventario.setBackground(sidebarHover);
             }
             @Override
+            // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
             public void mouseExited(MouseEvent e) {
                 if (panelActivo != btnInventario) btnInventario.setBackground(sidebarItem);
             }
@@ -350,14 +373,17 @@ public class formAdmin extends javax.swing.JFrame {
         ));
         btnSalir.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 mostrarConfirmacionSalida();
             }
             @Override
+            // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
             public void mouseEntered(MouseEvent e) {
                 btnSalir.setBackground(new Color(127, 29, 29));
             }
             @Override
+            // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
             public void mouseExited(MouseEvent e) {
                 btnSalir.setBackground(sidebarItem);
             }
@@ -420,7 +446,7 @@ public class formAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel panelSidebar;
     // End of variables declaration
     
-    // ===== Lucide-style SVG Icons as Swing Icons =====
+    // Iconos vectoriales dibujados en tiempo real para evitar assets externos.
     class LucideIcon implements javax.swing.Icon {
         private String name;
         private int size;
@@ -432,15 +458,20 @@ public class formAdmin extends javax.swing.JFrame {
             this.color = color;
         }
         
+        // Permite actualizar color del icono sin recrear la instancia.
         public void setColor(Color c) { this.color = c; }
         
         @Override
+        // Metodo getIconWidth: logica de interfaz asociada a este formulario/panel.
         public int getIconWidth() { return size; }
         @Override
+        // Metodo getIconHeight: logica de interfaz asociada a este formulario/panel.
         public int getIconHeight() { return size; }
         
         @Override
+        // Metodo paintIcon: logica de interfaz asociada a este formulario/panel.
         public void paintIcon(Component c, Graphics g, int x, int y) {
+            // Renderiza cada icono a escala 24x24 usando primitivas 2D.
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));

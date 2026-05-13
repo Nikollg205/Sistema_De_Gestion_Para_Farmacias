@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
+/**
+ * DAO de relación usuario-rol (tabla puente rol_usuarios).
+ */
 public class RolUsuariosDAO {
 
     private final Conexion CON;
@@ -17,6 +20,7 @@ public class RolUsuariosDAO {
         CON = Conexion.getInstancia();
     }
 
+    // Devuelve todos los roles asignados a un usuario.
     public List<Object[]> listarPorUsuario(String idUsuario) {
         List<Object[]> registros = new ArrayList<>();
         try {
@@ -38,6 +42,7 @@ public class RolUsuariosDAO {
         return registros;
     }
 
+    // Asigna un rol específico a un usuario.
     public boolean asignarRol(String idUsuario, String idRol) {
         resp = false;
         try {
@@ -54,6 +59,7 @@ public class RolUsuariosDAO {
         return resp;
     }
 
+    // Remueve una asignación puntual de rol.
     public boolean removerRol(String idUsuario, String idRol) {
         resp = false;
         try {
@@ -70,6 +76,7 @@ public class RolUsuariosDAO {
         return resp;
     }
 
+    // Limpia todas las asignaciones de rol del usuario.
     public boolean removerTodosRoles(String idUsuario) {
         resp = false;
         try {
@@ -85,6 +92,7 @@ public class RolUsuariosDAO {
         return resp;
     }
 
+    // Indica si el usuario ya posee un rol determinado.
     public boolean tieneRol(String idUsuario, String idRol) {
         boolean resp = false;
         try {
@@ -102,6 +110,7 @@ public class RolUsuariosDAO {
         return resp;
     }
 
+    // Cierre de recursos JDBC usados internamente.
     private void cerrar() {
         try {
             if (ps != null) ps.close();

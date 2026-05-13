@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
+/**
+ * DAO de usuario: operaciones CRUD, autenticación y utilidades de consulta.
+ */
 public class UsuarioDAO {
 
     private final Conexion CON;
@@ -17,6 +20,7 @@ public class UsuarioDAO {
         CON = Conexion.getInstancia();
     }
 
+    // Lista usuarios filtrados por nombre con datos de persona asociados.
     public List<Object[]> listar(String texto) {
         List<Object[]> registros = new ArrayList<>();
         try {
@@ -45,10 +49,11 @@ public class UsuarioDAO {
         return registros;
     }
 
+    // Inserta un usuario activo en la tabla usuario.
     public boolean insertar(String idUsuario, String idPersona, String nombreUsuario, String contrasena) {
         resp = false;
         try {
-            String sql = "INSERT INTO usuario (id_usuario, id_persona, nombre_usuario, contrasea_usuario, activo) VALUES (?,?,?,?,1)";
+            String sql = "INSERT INTO usuario (id_usuario, id_persona, nombre_usuario, contraseña_usuario, activo) VALUES (?,?,?,?,1)";
             ps = CON.conectar().prepareStatement(sql);
             ps.setString(1, idUsuario);
             ps.setString(2, idPersona);
@@ -63,10 +68,11 @@ public class UsuarioDAO {
         return resp;
     }
 
+    // Actualiza datos base del usuario y su estado.
     public boolean actualizar(String idUsuario, String idPersona, String nombreUsuario, String contrasena, int activo) {
         resp = false;
         try {
-            String sql = "UPDATE usuario SET id_persona=?, nombre_usuario=?, contrasea_usuario=?, activo=? WHERE id_usuario=?";
+            String sql = "UPDATE usuario SET id_persona=?, nombre_usuario=?, contraseña_usuario=?, activo=? WHERE id_usuario=?";
             ps = CON.conectar().prepareStatement(sql);
             ps.setString(1, idPersona);
             ps.setString(2, nombreUsuario);
@@ -82,6 +88,7 @@ public class UsuarioDAO {
         return resp;
     }
 
+    // Activa/inactiva un usuario por ID.
     public boolean toggleEstado(String idUsuario, int nuevoEstado) {
         resp = false;
         try {
@@ -98,6 +105,7 @@ public class UsuarioDAO {
         return resp;
     }
 
+    // Guarda fecha/hora de último acceso para auditoría básica.
     public boolean actualizarUltimoAcceso(String idUsuario) {
         resp = false;
         try {
@@ -113,6 +121,7 @@ public class UsuarioDAO {
         return resp;
     }
 
+    // Elimina físicamente un usuario por ID.
     public boolean eliminar(String idUsuario) {
         resp = false;
         try {
@@ -128,10 +137,11 @@ public class UsuarioDAO {
         return resp;
     }
 
+    // Valida si credenciales existen para un usuario activo.
     public boolean verificarCredenciales(String nombreUsuario, String contrasena) {
         boolean existe = false;
         try {
-            String sql = "SELECT id_usuario FROM usuario WHERE nombre_usuario=? AND contrasea_usuario=? AND activo=1";
+            String sql = "SELECT id_usuario FROM usuario WHERE nombre_usuario=? AND contraseña_usuario=? AND activo=1";
             ps = CON.conectar().prepareStatement(sql);
             ps.setString(1, nombreUsuario);
             ps.setString(2, contrasena);
@@ -145,10 +155,11 @@ public class UsuarioDAO {
         return existe;
     }
 
+    // Obtiene el ID del usuario autenticado por credenciales.
     public String getIdUsuario(String nombreUsuario, String contrasena) {
         String id = null;
         try {
-            String sql = "SELECT id_usuario FROM usuario WHERE nombre_usuario=? AND contrasea_usuario=? AND activo=1";
+            String sql = "SELECT id_usuario FROM usuario WHERE nombre_usuario=? AND contraseña_usuario=? AND activo=1";
             ps = CON.conectar().prepareStatement(sql);
             ps.setString(1, nombreUsuario);
             ps.setString(2, contrasena);
@@ -164,6 +175,36 @@ public class UsuarioDAO {
         return id;
     }
 
+    // Retorna datos de autenticación junto con el rol asociado.
+    public Object[] autenticarConRol(String nombreUsuario, String contrasena) {
+        Object[] auth = null;
+        try {
+            String sql = "SELECT u.id_usuario, u.nombre_usuario, r.nombre_rol "
+                    + "FROM usuario u "
+                    + "INNER JOIN rol_usuarios ru ON ru.id_usuario = u.id_usuario "
+                    + "INNER JOIN rol r ON r.id_rol = ru.id_rol "
+                    + "WHERE u.nombre_usuario = ? AND u.contraseña_usuario = ? AND u.activo = 1 "
+                    + "LIMIT 1";
+            ps = CON.conectar().prepareStatement(sql);
+            ps.setString(1, nombreUsuario);
+            ps.setString(2, contrasena);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                auth = new Object[]{
+                    rs.getString("id_usuario"),
+                    rs.getString("nombre_usuario"),
+                    rs.getString("nombre_rol")
+                };
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            cerrar();
+        }
+        return auth;
+    }
+
+    // Total de usuarios registrados.
     public int total() {
         int total = 0;
         try {
@@ -181,6 +222,7 @@ public class UsuarioDAO {
         return total;
     }
 
+    // Total de usuarios actualmente activos.
     public int totalActivos() {
         int total = 0;
         try {
@@ -198,6 +240,7 @@ public class UsuarioDAO {
         return total;
     }
 
+    // Verifica existencia de username para evitar duplicados.
     public boolean existe(String nombreUsuario) {
         boolean resp = false;
         try {
@@ -214,6 +257,7 @@ public class UsuarioDAO {
         return resp;
     }
 
+    // Trae el nombre real de persona asociado al id_usuario.
     public String getNombrePersona(String idUsuario) {
         String nombre = null;
         try {
@@ -232,6 +276,7 @@ public class UsuarioDAO {
         return nombre;
     }
 
+    // Cierra recursos JDBC abiertos por el DAO.
     private void cerrar() {
         try {
             if (ps != null) ps.close();

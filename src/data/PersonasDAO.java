@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
+/**
+ * PersonasDAO: clase del proyecto HealthPharmacy.
+ */
 public class PersonasDAO {
 
     private final Conexion CON;
@@ -155,3 +158,4 @@ public class PersonasDAO {
         }
     }
 }
+

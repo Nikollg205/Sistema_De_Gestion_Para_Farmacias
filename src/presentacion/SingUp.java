@@ -8,16 +8,14 @@ import java.awt.Cursor;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author nikol
+ * Pantalla de registro de usuarios.
+ * Crea persona, usuario y asigna rol inicial (Administrador o Cajero).
  */
 public class SingUp extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SingUp.class.getName());
 
-    /**
-     * Creates new form SingUp
-     */
+    // Inicializa componentes, placeholders y comportamiento de contraseña.
     public SingUp() {
         initComponents();
         btnLoginReverse.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -37,7 +35,65 @@ public class SingUp extends javax.swing.JFrame {
                 psPasswordNew.setEchoChar('•');
             }
         });
+        aplicarEstiloMinimo();
 
+    }
+
+    // Estilo visual liviano para mantener consistencia con Login.
+    private void aplicarEstiloMinimo() {
+        java.awt.Font labelFont = new java.awt.Font("SansSerif", java.awt.Font.BOLD, 16);
+        java.awt.Font inputFont = new java.awt.Font("SansSerif", java.awt.Font.PLAIN, 16);
+        java.awt.Color azulPrimario = new java.awt.Color(37, 99, 235);
+        java.awt.Color textoOscuro = new java.awt.Color(31, 41, 55);
+        java.awt.Color fondoInput = new java.awt.Color(248, 250, 252);
+        java.awt.Color bordeInput = new java.awt.Color(203, 213, 225);
+
+        jLabel1.setFont(labelFont);
+        jLabel11.setFont(labelFont);
+        jLabel14.setFont(labelFont);
+        jLabel15.setFont(labelFont);
+        jLabel16.setFont(labelFont);
+        jLabel3.setForeground(textoOscuro);
+
+        txtName.setFont(inputFont);
+        txtName.setBackground(fondoInput);
+        txtName.setForeground(textoOscuro);
+        txtName.setCaretColor(textoOscuro);
+        txtName.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                javax.swing.BorderFactory.createLineBorder(bordeInput, 1),
+                javax.swing.BorderFactory.createEmptyBorder(6, 10, 6, 10)));
+
+        txtPhoneNum.setFont(inputFont);
+        txtPhoneNum.setBackground(fondoInput);
+        txtPhoneNum.setForeground(textoOscuro);
+        txtPhoneNum.setCaretColor(textoOscuro);
+        txtPhoneNum.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                javax.swing.BorderFactory.createLineBorder(bordeInput, 1),
+                javax.swing.BorderFactory.createEmptyBorder(6, 10, 6, 10)));
+
+        txtEmail.setFont(inputFont);
+        txtEmail.setBackground(fondoInput);
+        txtEmail.setForeground(textoOscuro);
+        txtEmail.setCaretColor(textoOscuro);
+        txtEmail.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                javax.swing.BorderFactory.createLineBorder(bordeInput, 1),
+                javax.swing.BorderFactory.createEmptyBorder(6, 10, 6, 10)));
+
+        psPasswordNew.setFont(inputFont);
+        psPasswordNew.setBackground(fondoInput);
+        psPasswordNew.setForeground(textoOscuro);
+        psPasswordNew.setCaretColor(textoOscuro);
+        psPasswordNew.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                javax.swing.BorderFactory.createLineBorder(bordeInput, 1),
+                javax.swing.BorderFactory.createEmptyBorder(6, 10, 6, 10)));
+
+        cbRol.setFont(inputFont);
+        cbRol.setBackground(fondoInput);
+        cbRol.setForeground(textoOscuro);
+
+        btnCreateAccount.setBackground(azulPrimario);
+        btnCreateAccount.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        btnCreateAccount.setFocusPainted(false);
     }
 
     /**
@@ -75,8 +131,11 @@ public class SingUp extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         chkShow = new javax.swing.JCheckBox();
         btnLoginReverse = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        cbRol = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -96,7 +155,7 @@ public class SingUp extends javax.swing.JFrame {
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Join HealthFarmacy");
+        jLabel8.setText("Join HealthPharmacy");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 270, 50));
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
@@ -117,7 +176,7 @@ public class SingUp extends javax.swing.JFrame {
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 170, 110, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
-        jLabel3.setText("HealthFarmacy");
+        jLabel3.setText("HealthPharmacy");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 190, 40));
 
         jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
@@ -139,12 +198,12 @@ public class SingUp extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Create Account");
-        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 660, -1, -1));
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 710, -1, -1));
 
         btnCreateAccount.setBackground(new java.awt.Color(0, 102, 255));
         btnCreateAccount.setForeground(new java.awt.Color(255, 255, 255));
         btnCreateAccount.addActionListener(this::btnCreateAccountActionPerformed);
-        jPanel2.add(btnCreateAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 650, 160, 50));
+        jPanel2.add(btnCreateAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 700, 160, 50));
 
         jLabel14.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel14.setText("Contraseña*");
@@ -178,7 +237,7 @@ public class SingUp extends javax.swing.JFrame {
 
         jLabel6.setForeground(new java.awt.Color(153, 153, 153));
         jLabel6.setText("Already have acount? ");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 720, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 760, -1, -1));
 
         chkShow.setText("Show password");
         jPanel2.add(chkShow, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 590, -1, -1));
@@ -190,7 +249,14 @@ public class SingUp extends javax.swing.JFrame {
                 btnLoginReverseMouseClicked(evt);
             }
         });
-        jPanel2.add(btnLoginReverse, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 720, -1, -1));
+        jPanel2.add(btnLoginReverse, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 760, -1, -1));
+
+        jLabel16.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel16.setText("Rol*");
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 610, 120, 40));
+
+        cbRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cajero", "Administrador" }));
+        jPanel2.add(cbRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 650, 300, 35));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -217,12 +283,14 @@ public class SingUp extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
+        // Datos capturados del formulario.
         String name = txtName.getText();
         String phoneNum = txtPhoneNum.getText();
         String email = txtEmail.getText();
         String password = new String(psPasswordNew.getPassword());
+        String rolSeleccionado = (String) cbRol.getSelectedItem();
 
-        if (name.isEmpty() || password.isEmpty() || phoneNum.isEmpty() || email.isEmpty()) {
+        if (name.isEmpty() || password.isEmpty() || phoneNum.isEmpty() || email.isEmpty() || rolSeleccionado == null || rolSeleccionado.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios (*)",
                     "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
@@ -232,12 +300,12 @@ public class SingUp extends javax.swing.JFrame {
             database.Conexion con = database.Conexion.getInstancia();
             java.sql.Connection cn = con.conectar();
 
-            // Generar usuario automático: primernombre + número aleatorio
+            // Generar username automático: primer nombre + número aleatorio.
             String primerNombre = name.split(" ")[0].toLowerCase();
             int numeroAleatorio = (int) (Math.random() * 900) + 100; // número entre 100-999
             String usuarioGenerado = primerNombre + numeroAleatorio;
 
-            // Generar IDs automáticamente
+            // IDs simples basados en timestamp para persona y usuario.
             String idPersona = "PER-" + System.currentTimeMillis();
             String idUsuario = "USR-" + System.currentTimeMillis();
 
@@ -258,6 +326,14 @@ public class SingUp extends javax.swing.JFrame {
             psUsuario.setString(3, usuarioGenerado);
             psUsuario.setString(4, password);
             psUsuario.executeUpdate();
+
+            // Mapea selección visual a ID real de rol en BD.
+            String idRol = "Administrador".equalsIgnoreCase(rolSeleccionado) ? "ROL001" : "ROL002";
+            String sqlRolUsuario = "INSERT INTO rol_usuarios (id_usuario, id_rol) VALUES (?, ?)";
+            java.sql.PreparedStatement psRolUsuario = cn.prepareStatement(sqlRolUsuario);
+            psRolUsuario.setString(1, idUsuario);
+            psRolUsuario.setString(2, idRol);
+            psRolUsuario.executeUpdate();
 
             JOptionPane.showMessageDialog(this, "¡Registro exitoso!\nTu usuario es: " + usuarioGenerado + "\n¡Guárdalo para iniciar sesión!");
             con.desconectar();
@@ -319,12 +395,14 @@ public class SingUp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreateAccount;
     private javax.swing.JLabel btnLoginReverse;
+    private javax.swing.JComboBox<String> cbRol;
     private javax.swing.JCheckBox chkShow;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

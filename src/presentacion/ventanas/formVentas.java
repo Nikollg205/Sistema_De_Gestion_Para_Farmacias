@@ -19,7 +19,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import presentacion.Login;
+import roles.SesionUsuario;
 
+/**
+ * Ventana principal para el rol de cajero/operador.
+ * Gestiona navegación lateral y vistas internas (dashboard, ventas, inventario).
+ */
 public class formVentas extends javax.swing.JFrame {
     
     private CardLayout cardLayout;
@@ -28,7 +33,7 @@ public class formVentas extends javax.swing.JFrame {
     private formRegistrarVenta ventasPanel;
     private panelDashboard dashboardPanel;
     
-    // Paleta profesional farmacéutica - UI/UX Pro Max
+    // Paleta visual centralizada para mantener consistencia en toda la pantalla.
     private Color azulProfundo = new Color(15, 23, 42);
     private Color azulPrimario = new Color(59, 130, 246);
     private Color azulHover = new Color(37, 99, 235);
@@ -54,6 +59,7 @@ public class formVentas extends javax.swing.JFrame {
         seleccionarBoton(btnDashboard);
     }
     
+    // Carga paneles funcionales dentro del contenedor con CardLayout.
     private void cargarPaneles() {
         cardLayout = (CardLayout) panelContenido.getLayout();
         
@@ -67,10 +73,12 @@ public class formVentas extends javax.swing.JFrame {
         panelContenido.add(ventasPanel, "ventas");
     }
     
+    // Cambia la vista visible en el área principal.
     public void cambiarVista(String vista) {
         cardLayout.show(panelContenido, vista);
     }
     
+    // Sincroniza carrito externo con panel de ventas.
     public void actualizarCarrito(Map<String, Map<String, Object>> carrito) {
         if (ventasPanel != null) {
             ventasPanel.carritoVentas.clear();
@@ -81,12 +89,14 @@ public class formVentas extends javax.swing.JFrame {
         }
     }
     
+    // Atajo para agregar producto al carrito desde otras vistas.
     public void agregarProducto(String id, String nombre, String lote, double precio, int cantidad) {
         if (ventasPanel != null) {
             ventasPanel.agregarProducto(id, nombre, lote, precio, cantidad);
         }
     }
     
+    // Controla estado visual (activo/inactivo) de botones del sidebar.
     private void seleccionarBoton(JPanel boton) {
         btnDashboard.setBackground(azulSidebar);
         btnVentas.setBackground(azulSidebar);
@@ -109,6 +119,7 @@ public class formVentas extends javax.swing.JFrame {
         panelNavegacion.repaint();
     }
     
+    // Confirmación de logout con limpieza de sesión y retorno a Login.
     public void mostrarConfirmacionSalida() {
         int result = JOptionPane.showConfirmDialog(
             this,
@@ -119,6 +130,7 @@ public class formVentas extends javax.swing.JFrame {
         );
         
         if (result == JOptionPane.YES_OPTION) {
+            SesionUsuario.getInstancia().cerrarSesion();
             this.dispose();
             new Login().setVisible(true);
         }
@@ -203,7 +215,7 @@ public class formVentas extends javax.swing.JFrame {
         lblSubtitulo.setFont(new Font("Segoe UI", 0, 12));
         lblSubtitulo.setForeground(new Color(147, 197, 253));
         lblSubtitulo.setHorizontalAlignment(SwingConstants.CENTER);
-        lblSubtitulo.setText("Sistema de Gestión");
+        lblSubtitulo.setText("HealthPharmacy");
         panelMarca.add(lblSubtitulo, BorderLayout.PAGE_END);
 
         panelSidebar.add(panelMarca, BorderLayout.PAGE_START);
@@ -223,17 +235,20 @@ public class formVentas extends javax.swing.JFrame {
         ));
         btnDashboard.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 seleccionarBoton(btnDashboard);
                 cambiarVista("dashboard");
             }
             @Override
+            // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
             public void mouseEntered(MouseEvent e) {
                 if (panelActivo != btnDashboard) {
                     btnDashboard.setBackground(azulSidebarHover);
                 }
             }
             @Override
+            // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
             public void mouseExited(MouseEvent e) {
                 if (panelActivo != btnDashboard) {
                     btnDashboard.setBackground(azulSidebar);
@@ -242,6 +257,7 @@ public class formVentas extends javax.swing.JFrame {
         });
 
         lblIconDashboard.setHorizontalAlignment(SwingConstants.CENTER);
+        lblIconDashboard.setForeground(blanco);
         lblIconDashboard.setText("🏠");
         lblIconDashboard.setFont(new Font("Segoe UI Emoji", 0, 20));
         btnDashboard.add(lblIconDashboard, BorderLayout.WEST);
@@ -263,17 +279,20 @@ public class formVentas extends javax.swing.JFrame {
         ));
         btnVentas.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 seleccionarBoton(btnVentas);
                 cambiarVista("ventas");
             }
             @Override
+            // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
             public void mouseEntered(MouseEvent e) {
                 if (panelActivo != btnVentas) {
                     btnVentas.setBackground(azulSidebarHover);
                 }
             }
             @Override
+            // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
             public void mouseExited(MouseEvent e) {
                 if (panelActivo != btnVentas) {
                     btnVentas.setBackground(azulSidebar);
@@ -282,6 +301,7 @@ public class formVentas extends javax.swing.JFrame {
         });
 
         lblIconVentas.setHorizontalAlignment(SwingConstants.CENTER);
+        lblIconVentas.setForeground(blanco);
         lblIconVentas.setText("💰");
         lblIconVentas.setFont(new Font("Segoe UI Emoji", 0, 20));
         btnVentas.add(lblIconVentas, BorderLayout.WEST);
@@ -303,17 +323,20 @@ public class formVentas extends javax.swing.JFrame {
         ));
         btnInventario.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 seleccionarBoton(btnInventario);
                 cambiarVista("inventario");
             }
             @Override
+            // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
             public void mouseEntered(MouseEvent e) {
                 if (panelActivo != btnInventario) {
                     btnInventario.setBackground(azulSidebarHover);
                 }
             }
             @Override
+            // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
             public void mouseExited(MouseEvent e) {
                 if (panelActivo != btnInventario) {
                     btnInventario.setBackground(azulSidebar);
@@ -322,6 +345,7 @@ public class formVentas extends javax.swing.JFrame {
         });
 
         lblIconInventario.setHorizontalAlignment(SwingConstants.CENTER);
+        lblIconInventario.setForeground(blanco);
         lblIconInventario.setText("📦");
         lblIconInventario.setFont(new Font("Segoe UI Emoji", 0, 20));
         btnInventario.add(lblIconInventario, BorderLayout.WEST);
@@ -343,25 +367,28 @@ public class formVentas extends javax.swing.JFrame {
         ));
         btnSalir.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 mostrarConfirmacionSalida();
             }
             @Override
+            // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
             public void mouseEntered(MouseEvent e) {
                 btnSalir.setBackground(new Color(185, 28, 28));
                 lblIconSalir.setForeground(blanco);
                 lblSalir.setForeground(blanco);
             }
             @Override
+            // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
             public void mouseExited(MouseEvent e) {
                 btnSalir.setBackground(azulSidebar);
-                lblIconSalir.setForeground(new Color(252, 165, 165));
+                lblIconSalir.setForeground(blanco);
                 lblSalir.setForeground(new Color(252, 165, 165));
             }
         });
 
         lblIconSalir.setHorizontalAlignment(SwingConstants.CENTER);
-        lblIconSalir.setForeground(new Color(252, 165, 165));
+        lblIconSalir.setForeground(blanco);
         lblIconSalir.setText("🚪");
         lblIconSalir.setFont(new Font("Segoe UI Emoji", 0, 20));
         btnSalir.add(lblIconSalir, BorderLayout.WEST);

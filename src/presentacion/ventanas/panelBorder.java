@@ -45,6 +45,7 @@ public class panelBorder extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     @Override
+    // Metodo paintComponent: logica de interfaz asociada a este formulario/panel.
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

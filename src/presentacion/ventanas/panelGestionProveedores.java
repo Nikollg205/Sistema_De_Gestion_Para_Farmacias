@@ -41,6 +41,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+/**
+ * panelGestionProveedores: clase del proyecto HealthPharmacy.
+ */
 public class panelGestionProveedores extends javax.swing.JPanel {
     
     private formAdmin parent;
@@ -76,12 +79,14 @@ public class panelGestionProveedores extends javax.swing.JPanel {
         cargarDatos();
     }
     
+    // Metodo initTable: logica de interfaz asociada a este formulario/panel.
     private void initTable() {
         tableModel = new DefaultTableModel(
             new Object[]{"ID", "Empresa", "Producto", "Telefono", "Email", "Lotes", "Estado"},
             0
         ) {
             @Override
+            // Metodo isCellEditable: logica de interfaz asociada a este formulario/panel.
             public boolean isCellEditable(int row, int column) { return false; }
         };
         
@@ -111,6 +116,7 @@ public class panelGestionProveedores extends javax.swing.JPanel {
         // Center aligned renderers
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer() {
             @Override
+            // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
             public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
                 JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
@@ -126,6 +132,7 @@ public class panelGestionProveedores extends javax.swing.JPanel {
         // Text aligned renderers
         DefaultTableCellRenderer textRenderer = new DefaultTableCellRenderer() {
             @Override
+            // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
             public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
                 JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
@@ -141,6 +148,7 @@ public class panelGestionProveedores extends javax.swing.JPanel {
         tblProveedores.getColumnModel().getColumn(6).setCellRenderer(statusRenderer);
     }
     
+    // Metodo styleLabel: logica de interfaz asociada a este formulario/panel.
     private void styleLabel(JLabel label, boolean isSelected, int row) {
         if (isSelected) {
             label.setBackground(blue50);
@@ -153,10 +161,12 @@ public class panelGestionProveedores extends javax.swing.JPanel {
         label.setBorder(new EmptyBorder(0, 12, 0, 12));
     }
     
+    // Metodo cargarDatos: logica de interfaz asociada a este formulario/panel.
     private void cargarDatos() {
         actualizarTabla();
     }
     
+    // Metodo actualizarTabla: logica de interfaz asociada a este formulario/panel.
     private void actualizarTabla() {
         tableModel.setRowCount(0);
         String filtro = txtBuscar.getText().toLowerCase().trim();
@@ -180,6 +190,7 @@ public class panelGestionProveedores extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
+    // Metodo initComponents: logica de interfaz asociada a este formulario/panel.
     private void initComponents() {
         panelPrincipal = new javax.swing.JPanel();
         panelHeader = new javax.swing.JPanel();
@@ -242,6 +253,7 @@ public class panelGestionProveedores extends javax.swing.JPanel {
         txtBuscar.setBackground(white);
         txtBuscar.addFocusListener(new FocusAdapter() {
             @Override
+            // Metodo focusGained: logica de interfaz asociada a este formulario/panel.
             public void focusGained(FocusEvent evt) {
                 if (txtBuscar.getText().equals("Buscar proveedor...")) {
                     txtBuscar.setText("");
@@ -249,6 +261,7 @@ public class panelGestionProveedores extends javax.swing.JPanel {
                 }
             }
             @Override
+            // Metodo focusLost: logica de interfaz asociada a este formulario/panel.
             public void focusLost(FocusEvent evt) {
                 if (txtBuscar.getText().isEmpty()) {
                     txtBuscar.setText("Buscar proveedor...");
@@ -258,6 +271,7 @@ public class panelGestionProveedores extends javax.swing.JPanel {
         });
         txtBuscar.addKeyListener(new KeyAdapter() {
             @Override
+            // Metodo keyReleased: logica de interfaz asociada a este formulario/panel.
             public void keyReleased(KeyEvent evt) { actualizarTabla(); }
         });
         panelSearch.add(txtBuscar, BorderLayout.CENTER);
@@ -280,6 +294,7 @@ public class panelGestionProveedores extends javax.swing.JPanel {
         tblProveedores.setRowHeight(48);
         tblProveedores.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 int row = tblProveedores.rowAtPoint(e.getPoint());
                 int col = tblProveedores.columnAtPoint(e.getPoint());
@@ -311,10 +326,12 @@ public class panelGestionProveedores extends javax.swing.JPanel {
                 }
             }
             @Override
+            // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
             public void mouseEntered(MouseEvent e) {
                 tblProveedores.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
             @Override
+            // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
             public void mouseExited(MouseEvent e) {
                 tblProveedores.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
@@ -332,6 +349,7 @@ public class panelGestionProveedores extends javax.swing.JPanel {
         btnAgregar.setPreferredSize(new Dimension(180, 40));
         btnAgregar.addMouseListener(new MouseAdapter() {
             @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
                 mostrarFormularioAgregar();
             }
@@ -343,6 +361,7 @@ public class panelGestionProveedores extends javax.swing.JPanel {
         add(panelPrincipal, BorderLayout.CENTER);
     }
 
+    // Metodo mostrarFormularioAgregar: logica de interfaz asociada a este formulario/panel.
     private void mostrarFormularioAgregar() {
         JPanel formPanel = new JPanel(new GridBagLayout());
         formPanel.setBackground(white);
@@ -442,6 +461,7 @@ public class panelGestionProveedores extends javax.swing.JPanel {
         }
     }
     
+    // Metodo createField: logica de interfaz asociada a este formulario/panel.
     private JTextField createField() {
         JTextField field = new JTextField();
         field.setFont(new Font("Inter", Font.PLAIN, 13));
@@ -453,10 +473,12 @@ public class panelGestionProveedores extends javax.swing.JPanel {
         field.setMargin(new Insets(4, 10, 4, 10));
         field.addFocusListener(new FocusAdapter() {
             @Override
+            // Metodo focusGained: logica de interfaz asociada a este formulario/panel.
             public void focusGained(FocusEvent e) {
                 field.setBorder(new LineBorder(blue500, 2, true));
             }
             @Override
+            // Metodo focusLost: logica de interfaz asociada a este formulario/panel.
             public void focusLost(FocusEvent e) {
                 field.setBorder(new LineBorder(slate200, 1, true));
             }
@@ -464,6 +486,7 @@ public class panelGestionProveedores extends javax.swing.JPanel {
         return field;
     }
     
+    // Metodo createDialogBtn: logica de interfaz asociada a este formulario/panel.
     private JButton createDialogBtn(String text, Color bg, Color fg) {
         JButton btn = new JButton(text);
         btn.setFont(new Font("Inter", Font.BOLD, 12));
@@ -491,6 +514,7 @@ public class panelGestionProveedores extends javax.swing.JPanel {
         return btn;
     }
     
+    // Metodo mostrarDetalle: logica de interfaz asociada a este formulario/panel.
     private void mostrarDetalle(int row) {
         try {
             String id = tableModel.getValueAt(row, 0).toString();
@@ -534,6 +558,7 @@ public class panelGestionProveedores extends javax.swing.JPanel {
             this.color = color; this.thickness = thickness; this.radius = radius;
         }
         @Override
+        // Metodo paintBorder: logica de interfaz asociada a este formulario/panel.
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -566,6 +591,7 @@ public class panelGestionProveedores extends javax.swing.JPanel {
             });
         }
         @Override
+        // Metodo paintComponent: logica de interfaz asociada a este formulario/panel.
         protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -584,6 +610,7 @@ public class panelGestionProveedores extends javax.swing.JPanel {
             setBorder(new EmptyBorder(6, 12, 6, 12));
         }
         @Override
+        // Metodo getTableCellRendererComponent: logica de interfaz asociada a este formulario/panel.
         public Component getTableCellRendererComponent(JTable table, Object value,
             boolean isSelected, boolean hasFocus, int row, int column) {
             String estado = value.toString();
@@ -609,11 +636,14 @@ public class panelGestionProveedores extends javax.swing.JPanel {
         }
         
         @Override
+        // Metodo getIconWidth: logica de interfaz asociada a este formulario/panel.
         public int getIconWidth() { return size; }
         @Override
+        // Metodo getIconHeight: logica de interfaz asociada a este formulario/panel.
         public int getIconHeight() { return size; }
         
         @Override
+        // Metodo paintIcon: logica de interfaz asociada a este formulario/panel.
         public void paintIcon(Component c, Graphics g, int x, int y) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -635,3 +665,4 @@ public class panelGestionProveedores extends javax.swing.JPanel {
         }
     }
 }
+

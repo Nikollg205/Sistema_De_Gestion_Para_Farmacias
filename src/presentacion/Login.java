@@ -4,9 +4,16 @@
  */
 package presentacion;
 
+import data.UsuarioDAO;
 import javax.swing.JOptionPane;
+import presentacion.ventanas.formAdmin;
 import presentacion.ventanas.formVentas;
+import roles.SesionUsuario;
 
+/**
+ * Pantalla de autenticación principal.
+ * Valida credenciales, carga sesión y enruta según rol (admin/cajero).
+ */
 public class Login extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = 
@@ -18,6 +25,45 @@ public class Login extends javax.swing.JFrame {
         textoSombra user = new textoSombra("User", txtUser);
         textoSombra password = new textoSombra("Password", psPassword);
         setResizable(false);
+        aplicarEstiloMinimo();
+    }
+
+    // Pulido visual mínimo de inputs y botones sin modificar el layout generado.
+    private void aplicarEstiloMinimo() {
+        java.awt.Font labelFont = new java.awt.Font("SansSerif", java.awt.Font.BOLD, 16);
+        java.awt.Font inputFont = new java.awt.Font("SansSerif", java.awt.Font.PLAIN, 16);
+        java.awt.Color azulPrimario = new java.awt.Color(37, 99, 235);
+        java.awt.Color textoOscuro = new java.awt.Color(31, 41, 55);
+        java.awt.Color fondoInput = new java.awt.Color(248, 250, 252);
+        java.awt.Color bordeInput = new java.awt.Color(203, 213, 225);
+
+        jLabel1.setFont(labelFont);
+        jLabel11.setFont(labelFont);
+        jLabel3.setForeground(textoOscuro);
+
+        txtUser.setFont(inputFont);
+        txtUser.setBackground(fondoInput);
+        txtUser.setForeground(textoOscuro);
+        txtUser.setCaretColor(textoOscuro);
+        txtUser.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                javax.swing.BorderFactory.createLineBorder(bordeInput, 1),
+                javax.swing.BorderFactory.createEmptyBorder(6, 10, 6, 10)));
+
+        psPassword.setFont(inputFont);
+        psPassword.setBackground(fondoInput);
+        psPassword.setForeground(textoOscuro);
+        psPassword.setCaretColor(textoOscuro);
+        psPassword.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                javax.swing.BorderFactory.createLineBorder(bordeInput, 1),
+                javax.swing.BorderFactory.createEmptyBorder(6, 10, 6, 10)));
+
+        btnLogin.setBackground(azulPrimario);
+        btnLogin.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        btnLogin.setFocusPainted(false);
+
+        btnSignup1.setBackground(new java.awt.Color(59, 130, 246));
+        btnSignup1.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        btnSignup1.setFocusPainted(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,6 +96,7 @@ public class Login extends javax.swing.JFrame {
         btnSignup1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setBackground(new java.awt.Color(204, 204, 204));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -96,7 +143,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 170, 90, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
-        jLabel3.setText("HealthFarmacy");
+        jLabel3.setText("HealthPharmacy");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 190, 40));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -153,6 +200,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
+        // Captura de credenciales ingresadas en UI.
         String usuario = txtUser.getText();
         String password = new String(psPassword.getPassword());
 
@@ -163,31 +211,33 @@ public class Login extends javax.swing.JFrame {
         }
 
         try {
-            database.Conexion con = database.Conexion.getInstancia();
-            java.sql.Connection cn = con.conectar();
+            // 1) Autenticar usuario + rol desde base de datos.
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            Object[] auth = usuarioDAO.autenticarConRol(usuario, password);
 
-            String sql = "SELECT * FROM usuario WHERE nombre_usuario = ? AND contraseña_usuario = ? AND activo = 1";
-            java.sql.PreparedStatement ps = cn.prepareStatement(sql);
-            ps.setString(1, usuario);
-            ps.setString(2, password);
-            java.sql.ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                String sqlAcceso = "UPDATE usuario SET ultimo_acceso = NOW() WHERE nombre_usuario = ?";
-                java.sql.PreparedStatement psAcceso = cn.prepareStatement(sqlAcceso);
-                psAcceso.setString(1, usuario);
-                psAcceso.executeUpdate();
-
-                JOptionPane.showMessageDialog(this, "¡Bienvenido " + usuario + "!");
-                con.desconectar();
-                formVentas ventana = new formVentas();
-                ventana.setVisible(true);
-                this.dispose();
-            } else {
+            if (auth == null) {
                 JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos",
                         "Error", JOptionPane.ERROR_MESSAGE);
-                con.desconectar();
+                return;
             }
+
+            String idUsuario = (String) auth[0];
+            String nombreUsuario = (String) auth[1];
+            String nombreRol = (String) auth[2];
+
+            // 2) Persistir acceso y guardar sesión en singleton.
+            usuarioDAO.actualizarUltimoAcceso(idUsuario);
+            SesionUsuario.getInstancia().iniciarSesion(idUsuario, nombreUsuario, nombreRol);
+
+            JOptionPane.showMessageDialog(this, "¡Bienvenido " + nombreUsuario + " (" + nombreRol + ")!");
+
+            // 3) Navegación por rol.
+            if ("Administrador".equalsIgnoreCase(nombreRol)) {
+                new formAdmin().setVisible(true);
+            } else {
+                new formVentas().setVisible(true);
+            }
+            this.dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }

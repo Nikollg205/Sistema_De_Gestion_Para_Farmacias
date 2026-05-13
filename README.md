@@ -1,88 +1,182 @@
-# HealthPharmacy - Sistema de Gestion para Farmacias
+# HealthPharmacy 
 
-Proyecto Java Swing + MySQL para gestionar ventas, inventario, medicamentos, proveedores y usuarios con roles.
+La idea principal es separar:
 
-## Tecnologias
-- Java (Swing)
-- MySQL
-- NetBeans (proyecto Ant)
+- lo que el usuario ve (formularios/paneles),
+- lo que pasa en base de datos (DAOs),
+- y las reglas del negocio (clases)
+---
 
-## Estructura principal
-- `src/presentacion/`: pantallas y componentes Swing.
-- `src/data/`: DAOs y acceso a datos.
-- `src/database/`: conexion singleton a BD.
-- `src/medicamentos/` y `src/entidades/`: modelo de dominio de medicamentos.
-- `src/roles/`: sesion y roles de usuario.
+## 1. Arquitectura 
 
-## Funcionalidades implementadas
-- Login con validacion en BD y enrutamiento por rol.
-- Registro de usuarios (`SignUp`) con seleccion de rol (`Administrador` / `Cajero`).
-- Sesion global con singleton (`SesionUsuario`).
-- Panel de Admin (`formAdmin`) y panel de Cajero (`formVentas`).
-- Gestion de inventario y ajuste de stock.
-- Gestion de medicamentos con formularios dinamicos por tipo:
-  - `pastilla` / `liquido`
-  - `generico` / `marca`
-- Catalogo y gestion de proveedores.
-- Registro de ventas con detalle y reduccion de stock.
+El sistema funciona en 3 capas:
 
-## Roles y acceso
-- `Administrador`: acceso a panel administrativo.
-- `Cajero`: acceso a panel operativo de ventas/inventario.
+1. **Presentacion (`src/presentacion`)**
+   - Son las pantallas (`Login`, `SignUp`, `formAdmin`, `formVentas`, paneles de inventario, medicamentos, proveedores).
+   - Solo se captura lo que el usuario escribe, se valida y se muestran mensajes.
 
-El flujo de login usa `UsuarioDAO.autenticarConRol(...)` y abre:
-- `formAdmin` si el rol es `Administrador`
-- `formVentas` en caso contrario.
+2. **Datos (`src/data`)**
+   - Son los DAOs (`UsuarioDAO`, `MedicamentoDAO`, `FacturaDAO`, etc.).
+   - Aqui se ejecuta queries SQL: `SELECT`, `INSERT`, `UPDATE`, `DELETE`.
 
-## Cambios recientes relevantes
-- Correccion de autenticacion por rol y session handling.
-- Correccion de inconsistencias de columna de password a `contraseña_usuario`.
-- Asignacion de rol en registro de usuario (`rol_usuarios`).
-- Mejora visual minima en `Login` y `SignUp`.
-- Ocultacion de decoracion de ventana (`setUndecorated(true)`) en login/registro.
-- Correccion en alta de medicamentos para evitar `tipo_forma` / `tipo_comercial` nulos:
-  - En form se setean ambos valores antes de insertar.
-  - En DAO existen metodos de respaldo (`resolverTipoForma`, `resolverTipoComercial`).
-- Mejora de formularios con scroll para no ocultar campos:
-  - Alta de medicamento (admin).
-  - Ajuste de stock (admin).
-- Comentarios agregados en clases y metodos (forms, paneles, DAOs y core).
+3. **Clases (`src/medicamentos`, `src/entidades`, `src/inventario`, etc.)**
+   - Son las clases que representan cosas reales del negocio:
+     - medicamento,
+     - lote,
+     - factura,
+     - proveedor.
 
-## Base de datos
-Revisa y aplica tus scripts SQL del repo:
-- `proyecto_farmacia.sql` (estructura base)
-- `db_migration.sql` (ajustes/migraciones y datos de apoyo)
+---
 
-Tablas clave:
+## 2. Flujo del sistema 
+
+### Login
+
+1. El usuario escribe `usuario` y `password` en `Login`.
+2. `Login` llama a `UsuarioDAO.autenticarConRol(...)`.
+3. El DAO consulta `usuario + rol_usuarios + rol` y devuelve:
+   - id del usuario,
+   - nombre del usuario,
+   - nombre del rol.
+4. `Login` guarda esos datos en `SesionUsuario`.
+5. Segun el rol:
+   - `Administrador` -> abre `formAdmin`.
+   - `Cajero` -> abre `formVentas`.
+
+### Registro (`SignUp`)
+
+1. El usuario llena nombre, telefono, correo, password y rol.
+2. Se crea una fila en `personas`.
+3. Se crea una fila en `usuario`.
+4. Se crea la relacion en `rol_usuarios` (`ROL001` admin / `ROL002` cajero).
+
+---
+
+## 3. Logica de formularios
+
+### `Login` y `SignUp`
+- Son la entrada al sistema.
+
+### `formAdmin`
+- Es la ventana principal del admin.
+- Tiene menu lateral y cambia vistas con `CardLayout`.
+- Carga paneles como:
+  - dashboard admin,
+  - inventario admin,
+  - agregar medicamentos,
+  - proveedores.
+  - logOut
+
+### `formVentas`
+- Es la ventana del cajero.
+- Tambien usa `CardLayout`.
+- Permite:
+  - ver dashboard operativo,
+  - registrar venta,
+  - consultar inventario.
+  - logOut
+
+### `panelAgregarMedicamentos`
+- Muestra tabla de medicamentos.
+- Abre formulario para crear medicamento.
+- El formulario cambia campos segun:
+  - forma: `pastilla` o `liquido`,
+  - tipo comercial: `generico` o `marca`.
+
+### `panelAdminInventario`
+- Muestra lotes, stock y estado.
+- Permite:
+  - crear lote nuevo,
+  - ajustar stock de un lote.
+
+---
+
+## 4. Logica de los DAOs
+
+### `Conexion`
+- Es un singleton que centraliza la conexion a MySQL.
+- Todos los DAOs usan esa misma manera de conectarse.
+
+### `UsuarioDAO`
+- Administra usuarios:
+  - crear,
+  - editar,
+  - activar/desactivar,
+  - autenticar.
+- Tambien actualiza `ultimo_acceso`.
+
+### `RolDAO` y `RolUsuariosDAO`
+- `RolDAO`: administra los roles.
+- `RolUsuariosDAO`: administra la relacion entre usuario-rol.
+
+### `MedicamentoDAO`
+- Es el mas importantes.
+- Guarda y lee medicamentos de varios tipos concretos:
+  - `PastillaGenerica`,
+  - `PastillaMarca`,
+  - `LiquidoGenerico`,
+  - `LiquidoMarca`.
+- Tiene validaciones de stock y consultas de alertas.
+
+### `LoteInventarioDAO`
+- Maneja lotes de inventario por medicamento.
+- Permite crear y actualizar cantidad disponible por lote.
+
+### `FacturaDAO` y `DetalleVentaDAO`
+- `FacturaDAO`: muestra: (quien vendio, total, fecha, estado).
+- `DetalleVentaDAO`: Muestra detalles como: (producto, cantidad, precio).
+- Trabajan juntos para registrar una venta completa.
+
+### `ProveedorDAO` y `PersonasDAO`
+- `ProveedorDAO`: CRUD y estado de proveedores.
+- `PersonasDAO`: datos personales de usuarios.
+---
+
+## 5. Modelo de clases de medicamentos
+
+El sistema no debe tratar a todos los medicamentos como si fueran iguales.
+
+Jerarquia:
+
+- `Medicamento` (Clase base)
+  - `MedicamentoPastilla` (abstracta)
+    - `PastillaGenerica`
+    - `PastillaMarca`
+  - `MedicamentoLiquido` (abstracta)
+    - `LiquidoGenerico`
+    - `LiquidoMarca`
+
+Se hace con el fin de:
+
+- No mezclar campos que no aplican.
+  - como: un liquido no necesita `tipo_pastilla`.
+- Se guarda en BD solo lo que se debe y el resto en `NULL`.
+
+---
+
+## 6. Base de datos que espera el sistema y archivos
+
+Tablas :
+
 - `usuario`
 - `rol`
 - `rol_usuarios`
+- `personas`
 - `medicamento`
 - `lote`
 - `factura`
 - `detalle_venta`
 - `proveedor`
 
-## Configuracion de conexion
-En `src/database/Conexion.java`:
-- URL: `jdbc:mysql://localhost:3308/`
-- DB: `proyecto_farmacia`
-- USER: `root`
-- PASSWORD: ``
+Archivos SQL en repo:
 
-Ajusta estos valores segun tu entorno.
+- `proyecto_farmacia.sql` (base)
+- `db_migration.sql` (ajustes/migraciones) -- CREADA PARA DATOS DE PRUEBA
 
-## Librerias necesarias
-En la raiz del proyecto:
+---
+Dependencias :
+
 - `mysql-connector-j-9.7.0.jar`
 - `AbsoluteLayout-RELEASE290.jar`
 
-## Ejecutar en NetBeans
-1. Abre el proyecto.
-2. Verifica que `nbproject/project.properties` tenga:
-   - `main.class=presentacion.Login`
-3. Ejecuta Run Project.
-
-## Notas
-- El proyecto usa singleton de conexion y singleton de sesion.
-- Se recomienda restringir creacion de admins en produccion (actualmente puede seleccionarse en `SignUp`).
+---

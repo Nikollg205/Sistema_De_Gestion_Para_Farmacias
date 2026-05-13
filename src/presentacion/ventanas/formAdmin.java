@@ -35,6 +35,7 @@ public class formAdmin extends javax.swing.JFrame {
     private panelAgregarMedicamentos medicamentosPanel;
     private panelGestionProveedores proveedoresPanel;
     private panelAdminInventario inventarioPanel;
+    private panelAdminReportes reportesPanel;
     
     // Design tokens: paleta central para mantener consistencia visual.
     private Color slate900 = new Color(15, 23, 42);
@@ -83,11 +84,20 @@ public class formAdmin extends javax.swing.JFrame {
         
         inventarioPanel = new panelAdminInventario(this);
         panelContenido.add(inventarioPanel, "inventario");
+
+        reportesPanel = new panelAdminReportes();
+        panelContenido.add(reportesPanel, "reportes");
     }
     
     // Cambia la vista activa del contenedor central.
     public void cambiarVista(String vista) {
         cardLayout.show(panelContenido, vista);
+    }
+
+    // Abre reportes asegurando estado visual correcto en sidebar.
+    public void abrirReportes() {
+        seleccionarBoton(btnReportes);
+        cambiarVista("reportes");
     }
     
     // Actualiza estado visual del menú lateral (item activo vs inactivo).
@@ -97,12 +107,14 @@ public class formAdmin extends javax.swing.JFrame {
         btnMedicamentos.setBackground(sidebarItem);
         btnProveedores.setBackground(sidebarItem);
         btnInventario.setBackground(sidebarItem);
+        btnReportes.setBackground(sidebarItem);
         btnSalir.setBackground(sidebarItem);
         
         lblDashboard.setForeground(slate400);
         lblMedicamentos.setForeground(slate400);
         lblProveedores.setForeground(slate400);
         lblInventario.setForeground(slate400);
+        lblReportes.setForeground(slate400);
         lblSalir.setForeground(new Color(252, 165, 165));
         
         // Set active state
@@ -113,6 +125,7 @@ public class formAdmin extends javax.swing.JFrame {
             if (boton == btnMedicamentos) lblMedicamentos.setForeground(white);
             if (boton == btnProveedores) lblProveedores.setForeground(white);
             if (boton == btnInventario) lblInventario.setForeground(white);
+            if (boton == btnReportes) lblReportes.setForeground(white);
             if (boton == btnSalir) lblSalir.setForeground(white);
         }
         panelNavegacion.repaint();
@@ -173,6 +186,9 @@ public class formAdmin extends javax.swing.JFrame {
         btnInventario = new javax.swing.JPanel();
         lblIconInventario = new javax.swing.JLabel();
         lblInventario = new javax.swing.JLabel();
+        btnReportes = new javax.swing.JPanel();
+        lblIconReportes = new javax.swing.JLabel();
+        lblReportes = new javax.swing.JLabel();
         btnSalir = new javax.swing.JPanel();
         lblIconSalir = new javax.swing.JLabel();
         lblSalir = new javax.swing.JLabel();
@@ -216,7 +232,7 @@ public class formAdmin extends javax.swing.JFrame {
 
         // Navigation
         panelNavegacion.setBackground(sidebarBg);
-        panelNavegacion.setLayout(new java.awt.GridLayout(5, 1, 0, 4));
+        panelNavegacion.setLayout(new java.awt.GridLayout(6, 1, 0, 4));
         panelNavegacion.setBorder(BorderFactory.createEmptyBorder(16, 12, 16, 12));
 
         // Dashboard button
@@ -363,6 +379,42 @@ public class formAdmin extends javax.swing.JFrame {
         btnInventario.add(lblInventario, BorderLayout.CENTER);
         panelNavegacion.add(btnInventario);
 
+        // Reportes button
+        btnReportes.setBackground(sidebarItem);
+        btnReportes.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnReportes.setLayout(new BorderLayout(12, 0));
+        btnReportes.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createEmptyBorder(10, 14, 10, 14),
+            BorderFactory.createEmptyBorder()
+        ));
+        btnReportes.addMouseListener(new MouseAdapter() {
+            @Override
+            // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
+            public void mouseClicked(MouseEvent e) {
+                seleccionarBoton(btnReportes);
+                cambiarVista("reportes");
+            }
+            @Override
+            // Metodo mouseEntered: logica de interfaz asociada a este formulario/panel.
+            public void mouseEntered(MouseEvent e) {
+                if (panelActivo != btnReportes) btnReportes.setBackground(sidebarHover);
+            }
+            @Override
+            // Metodo mouseExited: logica de interfaz asociada a este formulario/panel.
+            public void mouseExited(MouseEvent e) {
+                if (panelActivo != btnReportes) btnReportes.setBackground(sidebarItem);
+            }
+        });
+        lblIconReportes.setHorizontalAlignment(SwingConstants.CENTER);
+        lblIconReportes.setPreferredSize(new Dimension(24, 24));
+        lblIconReportes.setIcon(new LucideIcon("bar-chart-3", 20, slate400));
+        btnReportes.add(lblIconReportes, BorderLayout.WEST);
+        lblReportes.setFont(new Font("Inter", Font.BOLD, 14));
+        lblReportes.setForeground(slate400);
+        lblReportes.setText("Reportes");
+        btnReportes.add(lblReportes, BorderLayout.CENTER);
+        panelNavegacion.add(btnReportes);
+
         // Salir button
         btnSalir.setBackground(sidebarItem);
         btnSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -425,17 +477,20 @@ public class formAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel btnInventario;
     private javax.swing.JPanel btnMedicamentos;
     private javax.swing.JPanel btnProveedores;
+    private javax.swing.JPanel btnReportes;
     private javax.swing.JPanel btnSalir;
     private javax.swing.JLabel lblDashboard;
     private javax.swing.JLabel lblIconDashboard;
     private javax.swing.JLabel lblIconInventario;
     private javax.swing.JLabel lblIconMedicamentos;
     private javax.swing.JLabel lblIconProveedores;
+    private javax.swing.JLabel lblIconReportes;
     private javax.swing.JLabel lblIconSalir;
     private javax.swing.JLabel lblInventario;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblMedicamentos;
     private javax.swing.JLabel lblProveedores;
+    private javax.swing.JLabel lblReportes;
     private javax.swing.JLabel lblSalir;
     private javax.swing.JLabel lblSubtitulo;
     private javax.swing.JLabel lblTitulo;

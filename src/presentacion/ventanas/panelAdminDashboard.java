@@ -426,8 +426,7 @@ public class panelAdminDashboard extends javax.swing.JPanel {
             @Override
             // Metodo mouseClicked: logica de interfaz asociada a este formulario/panel.
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(panelAdminDashboard.this,
-                    "Modulo de reportes en desarrollo", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                parent.abrirReportes();
             }
         });
         panelAcciones.add(btnReporte);

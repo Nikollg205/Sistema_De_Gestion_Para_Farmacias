@@ -39,6 +39,7 @@ import data.DetalleVentaDAO;
 import data.FacturaDAO;
 import data.MedicamentoDAO;
 import inventario.Factura;
+import roles.SesionUsuario;
 
 /**
  * formRegistrarVenta: clase del proyecto HealthPharmacy.
@@ -340,7 +341,8 @@ public class formRegistrarVenta extends javax.swing.JPanel {
             factura.setSubTotal(subtotal);
             factura.setIva(impuesto);
             factura.setEstado("pagada");
-            factura.setVendedor(null);
+            // Guardar el cajero autenticado para enlazar correctamente venta -> usuario.
+            factura.setVendedor(SesionUsuario.getInstancia().getIdUsuario());
             factura.setIdDetalleVenta("DET" + System.currentTimeMillis() % 100000);
             
             boolean facturaGuardada = facturaDAO.insertar(factura);

@@ -31,7 +31,7 @@ public class Menu extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         panelMoving = new javax.swing.JPanel();
@@ -111,10 +111,10 @@ public class Menu extends javax.swing.JPanel {
        });
     }
     
-    // Variables declaration - do not modify
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private presentacion.ventanas.listMenu<String> listMenu1;
     private javax.swing.JPanel panelMoving;
-    // End of variables declaration
+    // End of variables declaration//GEN-END:variables
 }
 

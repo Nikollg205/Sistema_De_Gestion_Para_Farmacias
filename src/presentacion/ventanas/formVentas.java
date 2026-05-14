@@ -52,8 +52,8 @@ public class formVentas extends javax.swing.JFrame {
     public formVentas() {
         initComponents();
         setLocationRelativeTo(null);
-        setResizable(false);
-        setSize(1400, 800);
+        setResizable(true);
+        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         
         cargarPaneles();
         seleccionarBoton(btnDashboard);
@@ -153,7 +153,7 @@ public class formVentas extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         panelPrincipal = new javax.swing.JPanel();
@@ -421,9 +421,9 @@ public class formVentas extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>
+    }// </editor-fold>//GEN-END:initComponents
 
-    // Variables declaration - do not modify
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnDashboard;
     private javax.swing.JPanel btnInventario;
     private javax.swing.JPanel btnSalir;
@@ -444,5 +444,5 @@ public class formVentas extends javax.swing.JFrame {
     private javax.swing.JPanel panelNavegacion;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JPanel panelSidebar;
-    // End of variables declaration
+    // End of variables declaration//GEN-END:variables
 }

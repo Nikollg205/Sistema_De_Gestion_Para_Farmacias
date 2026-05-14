@@ -62,8 +62,8 @@ public class formAdmin extends javax.swing.JFrame {
     public formAdmin() {
         initComponents();
         setLocationRelativeTo(null);
-        setResizable(false);
-        setSize(1400, 800);
+        setResizable(true);
+        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         
         cargarPaneles();
         seleccionarBoton(btnDashboard);

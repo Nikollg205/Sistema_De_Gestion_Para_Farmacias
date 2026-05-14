@@ -123,7 +123,7 @@ public class menuItem extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         lblIcon = new javax.swing.JLabel();
@@ -151,7 +151,7 @@ public class menuItem extends javax.swing.JPanel {
             .addComponent(lblIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
-    }// </editor-fold>
+    }// </editor-fold>//GEN-END:initComponents
     
     @Override
     public void paintComponents(Graphics grphcs) {
@@ -164,9 +164,9 @@ public class menuItem extends javax.swing.JPanel {
         super.paintComponents(grphcs); 
     }
 
-    // Variables declaration - do not modify
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblIcon;
     private javax.swing.JLabel lblName;
-    // End of variables declaration
+    // End of variables declaration//GEN-END:variables
 }
 

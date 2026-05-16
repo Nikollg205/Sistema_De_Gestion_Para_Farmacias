@@ -109,7 +109,10 @@ CREATE TABLE `medicamento` (
   `formula` varchar(250) DEFAULT NULL,
   `stock_medicamento` int(11) NOT NULL,
   `contenido_unidad` int(11) NOT NULL,
-  `nombre_medicamento` varchar(30) NOT NULL
+  `nombre_medicamento` varchar(30) NOT NULL,
+  `tipo_forma` varchar(30) NOT NULL,
+  `tipo_comercial` varchar(30) NOT NULL,
+  `laboratorio` varhcar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
